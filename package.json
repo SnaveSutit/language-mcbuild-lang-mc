@@ -1,0 +1,34 @@
+{
+	"name": "mcbuild-lang-mc-syntax-highlighter",
+	"displayName": "MCBuild lang-mc Syntax Highlighter",
+	"description": "highlights stuff",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.60.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "lang-mc",
+				"aliases": [ "MCBuild:lang-mc", "lang-mc" ],
+				"extensions": [ ".mc" ],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "lang-mc",
+				"scopeName": "source.lang-mc",
+				"path": "./syntaxes/lang-mc.tmLanguage.json",
+				"embeddedLanguages": {
+					"meta.embedded.block.javascript": "javascript",
+					"meta.embedded.block.json": "json",
+					"meta.embedded.block.mcfunction": "mcfunction"
+				}
+			}
+		]
+	}
+}

@@ -1,0 +1,576 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "lang-mc",
+	"patterns": [
+		{
+			"include": "#namespace_context"
+		}
+	],
+	"repository": {
+		"mcfunction_fix": {
+			"patterns": [
+				{
+					"match": "\n"
+				},
+				{
+					"include": "source.mcfunction"
+				}
+			]
+		},
+		"namespace_context": {
+			"patterns": [
+				{
+					"include": "#inline_script"
+				},
+				{
+					"include": "#multiline_script"
+				},
+				{
+					"include": "#dir_def"
+				},
+				{
+					"include": "#function_def"
+				},
+				{
+					"include": "#recipe_def"
+				},
+				{
+					"include": "#item_type_def"
+				},
+				{
+					"include": "#predicate_def"
+				},
+				{
+					"include": "#fluid_type_def"
+				},
+				{
+					"include": "#loot_table_def"
+				},
+				{
+					"include": "#block_type_def"
+				},
+				{
+					"include": "#advancement_def"
+				},
+				{
+					"include": "#entity_type_def"
+				},
+				{
+					"include": "#function_tag_def"
+				},
+				{
+					"include": "#item_modifier_def"
+				},
+				{
+					"include": "#namespace_context.compile_if"
+				},
+				{
+					"include": "#namespace_context.compile_loop"
+				}
+			]
+		},
+		"function_context": {
+			"patterns": [
+				{
+					"include": "#inline_script"
+				},
+				{
+					"include": "#multiline_script"
+				},
+				{
+					"include": "#namespace_context.compile_if"
+				},
+				{
+					"include": "#function_context.compile_loop"
+				},
+				{
+					"include": "#function_block"
+				},
+				{
+					"include": "#execute_run_block"
+				},
+				{
+					"include": "#execute_if_block"
+				},
+				{
+					"include": "#mcfunction_fix"
+				}
+			]
+		},
+		"dir_def": {
+			"begin": "^\\s*(dir) ([\\S]+) {\\s*$",
+			"end": "^\\s*}\\s*$",
+			"captures": {
+				"1": {
+					"name": "keyword.control.dir"
+				},
+				"2": {
+					"name": "entity.name.function",
+					"patterns": [
+						{
+							"include": "#inline_script"
+						}
+					]
+				}
+			},
+			"name": "dir",
+			"patterns": [
+				{
+					"include": "#namespace_context"
+				}
+			]
+		},
+		"function_def": {
+			"begin": "^\\s*(function) (.+)\\s*{\\s*$",
+			"end": "^\\s*}\\s*$",
+			"captures": {
+				"1": {
+					"name": "keyword.control.function"
+				},
+				"2": {
+					"name": "entity.name.function",
+					"patterns": [
+						{
+							"include": "#inline_script"
+						}
+					]
+				}
+			},
+			"name": "function",
+			"patterns": [
+				{
+					"include": "#function_context"
+				}
+			]
+		},
+		"multiline_script": {
+			"begin": "^\\s*<%%\\s*$",
+			"end": "^\\s*%%>\\s*$",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.paren.open"
+				}
+			},
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.paren.close"
+				}
+			},
+			"contentName": "meta.embedded.block.javascript",
+			"name": "multiline_script",
+			"patterns": [
+				{
+					"include": "source.js"
+				}
+			]
+		},
+		"inline_script": {
+			"match": "<%(.*)?%>",
+			"captures": {
+				"1": {
+					"name": "meta.embedded.block.javascript",
+					"patterns": [
+						{
+							"include": "source.js"
+						}
+					]
+				}
+			},
+			"name": "inline_script"
+		},
+		"namespace_context.compile_loop": {
+			"match": "^\\s*(LOOP)\\s*\\((.+)\\)\\s*{\\s*$",
+			"captures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "#compile_loop.arguments"
+						}
+					]
+				}
+			},
+			"name": "compile_loop",
+			"patterns": [
+				{
+					"include": "#namespace_context"
+				}
+			]
+		},
+		"function_context.compile_loop": {
+			"match": "^\\s*(LOOP)\\s*\\((.+)\\)\\s*{\\s*$",
+			"captures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "#compile_loop.arguments"
+						}
+					]
+				}
+			},
+			"name": "compile_loop",
+			"patterns": [
+				{
+					"include": "#function_context"
+				}
+			]
+		},
+		"compile_loop.arguments": {
+			"match": "(.+),(.+)",
+			"captures": {
+				"1": {
+					"name": "meta.embedded.block.javascript",
+					"patterns": [
+						{
+							"include": "source.js"
+						}
+					]
+				},
+				"2": {
+					"name": "variable.name"
+				}
+			},
+			"name": "compile_loop"
+		},
+		"namespace_context.compile_if": {
+			"match": "^\\s*(IF)\\s*\\((.+)\\)\\s*{\\s*$",
+			"captures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "source.js"
+						}
+					]
+				}
+			},
+			"name": "compile_if",
+			"patterns": [
+				{
+					"include": "#namespace_context"
+				}
+			]
+		},
+		"function_context.compile_if": {
+			"match": "^\\s*(IF)\\s*\\((.+)\\)\\s*{\\s*$",
+			"captures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "source.js"
+						}
+					]
+				}
+			},
+			"name": "compile_if",
+			"patterns": [
+				{
+					"include": "#function_context"
+				}
+			]
+		},
+		"execute_run_block": {
+			"begin": "(^\\s*execute.* run\\s*){\\s*$",
+			"beginCaptures": {
+				"1": {
+					"patterns": [
+						{
+							"include": "source.mcfunction"
+						}
+					]
+				}
+			},
+			"end": "^\\s*}\\s*$",
+			"name": "execute_run_block",
+			"patterns": [
+				{
+					"include": "#function_context"
+				}
+			]
+		},
+		"function_block": {
+			"begin": "^\\s*(block)\\s*{\\s*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				}
+			},
+			"end": "^\\s*}\\s*$",
+			"name": "function_block",
+			"patterns": [
+				{
+					"include": "#function_context"
+				}
+			]
+		},
+		"loot_table_def": {
+			"begin": "^\\s*(loot) (.+)\\s*{\\s*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"name": "entity.name.function",
+					"patterns": [
+						{
+							"include": "#inline_script"
+						}
+					]
+				}
+			},
+			"end": "^\\s*}\\s*$",
+			"name": "loot_table_def",
+			"patterns": [
+				{
+					"include": "source.json"
+				}
+			]
+		},
+		"advancement_def": {
+			"begin": "^\\s*(advancement) (.+)\\s*{\\s*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"name": "entity.name.function",
+					"patterns": [
+						{
+							"include": "#inline_script"
+						}
+					]
+				}
+			},
+			"end": "^\\s*}\\s*$",
+			"name": "advancement_def",
+			"patterns": [
+				{
+					"include": "source.json"
+				}
+			]
+		},
+		"entity_type_def": {
+			"begin": "^\\s*(entities) (.+)\\s*{\\s*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"name": "entity.name.function",
+					"patterns": [
+						{
+							"include": "#inline_script"
+						}
+					]
+				}
+			},
+			"end": "^\\s*}\\s*$",
+			"name": "entity_type_def",
+			"patterns": [
+				{
+					"include": "source.json"
+				}
+			]
+		},
+		"function_tag_def": {
+			"begin": "^\\s*(functions) (.+)\\s*{\\s*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"name": "entity.name.function",
+					"patterns": [
+						{
+							"include": "#inline_script"
+						}
+					]
+				}
+			},
+			"end": "^\\s*}\\s*$",
+			"name": "function_tag_def",
+			"patterns": [
+				{
+					"include": "source.json"
+				}
+			]
+		},
+		"item_modifier_def": {
+			"begin": "^\\s*(modifier) (.+)\\s*{\\s*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"name": "entity.name.function",
+					"patterns": [
+						{
+							"include": "#inline_script"
+						}
+					]
+				}
+			},
+			"end": "^\\s*}\\s*$",
+			"name": "item_modifier_def",
+			"patterns": [
+				{
+					"include": "source.json"
+				}
+			]
+		},
+		"block_type_def": {
+			"begin": "^\\s*(blocks) (.+)\\s*{\\s*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"name": "entity.name.function",
+					"patterns": [
+						{
+							"include": "#inline_script"
+						}
+					]
+				}
+			},
+			"end": "^\\s*}\\s*$",
+			"name": "block_type_def",
+			"patterns": [
+				{
+					"include": "source.json"
+				}
+			]
+		},
+		"item_type_def": {
+			"begin": "^\\s*(items) (.+)\\s*{\\s*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"name": "entity.name.function",
+					"patterns": [
+						{
+							"include": "#inline_script"
+						}
+					]
+				}
+			},
+			"end": "^\\s*}\\s*$",
+			"name": "item_type_def",
+			"patterns": [
+				{
+					"include": "source.json"
+				}
+			]
+		},
+		"fluid_type_def": {
+			"begin": "^\\s*(fluids) (.+)\\s*{\\s*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"name": "entity.name.function",
+					"patterns": [
+						{
+							"include": "#inline_script"
+						}
+					]
+				}
+			},
+			"end": "^\\s*}\\s*$",
+			"name": "fluid_type_def",
+			"patterns": [
+				{
+					"include": "source.json"
+				}
+			]
+		},
+		"predicate_def": {
+			"begin": "^\\s*(predicate) (.+)\\s*{\\s*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"name": "entity.name.function",
+					"patterns": [
+						{
+							"include": "#inline_script"
+						}
+					]
+				}
+			},
+			"end": "^\\s*}\\s*$",
+			"name": "predicate_def",
+			"patterns": [
+				{
+					"include": "source.json"
+				}
+			]
+		},
+		"recipe_def": {
+			"begin": "^\\s*(recipe) (.+)\\s*{\\s*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"name": "entity.name.function",
+					"patterns": [
+						{
+							"include": "#inline_script"
+						}
+					]
+				}
+			},
+			"end": "^\\s*}\\s*$",
+			"name": "recipe_def",
+			"patterns": [
+				{
+					"include": "source.json"
+				}
+			]
+		},
+		"execute_if_block": {
+			"begin": "^\\s*(execute)\\s*\\((.+)\\)\\s*{\\s*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"patterns": [
+						{
+							"begin": "(?<=[ \\(])",
+							"end": "[\\( ]",
+							"patterns": [
+								{
+									"include": "source.mcfunction.command.tokens"
+								}
+							]
+						}
+					]
+				}
+			},
+			"end": "^\\s*}\\s*$",
+			"name": "execute_if_block",
+			"patterns": [
+				{
+					"include": "#mcfunction_fix"
+				}
+			]
+		}
+	},
+	"scopeName": "source.lang-mc"
+}
