@@ -20,6 +20,9 @@
 		"namespace_context": {
 			"patterns": [
 				{
+					"include": "#comment"
+				},
+				{
 					"include": "#inline_script"
 				},
 				{
@@ -66,6 +69,9 @@
 				},
 				{
 					"include": "#namespace_context.compile_loop"
+				},
+				{
+					"include": "#namespace_context.shorthand_compile_if"
 				}
 			]
 		},
@@ -84,6 +90,9 @@
 					"include": "#function_context.compile_loop"
 				},
 				{
+					"include": "#function_context.shorthand_compile_if"
+				},
+				{
 					"include": "#function_block"
 				},
 				{
@@ -91,6 +100,12 @@
 				},
 				{
 					"include": "#execute_if_block"
+				},
+				{
+					"include": "#execute_if_else_block"
+				},
+				{
+					"include": "#execute_else_block"
 				},
 				{
 					"include": "#mcfunction_fix"
@@ -143,6 +158,13 @@
 				}
 			]
 		},
+		"comment":{
+			"match": "^\\s*(#.+)$",
+			"captures": {
+				"1": {"patterns": [{"include": "#inline_script"}]}
+			},
+			"name":"comment.line"
+		},
 		"multiline_script": {
 			"begin": "^\\s*<%%\\s*$",
 			"end": "^\\s*%%>\\s*$",
@@ -165,15 +187,21 @@
 			]
 		},
 		"inline_script": {
-			"match": "<%(.*)?%>",
+			"match": "(<%)(.*?)?(%>)",
 			"captures": {
-				"1": {
+				"1":{
+					"name":"constant.character"
+				},
+				"2": {
 					"name": "meta.embedded.block.javascript",
 					"patterns": [
 						{
 							"include": "source.js"
 						}
 					]
+				},
+				"3":{
+					"name":"constant.character"
 				}
 			},
 			"name": "inline_script"
@@ -273,6 +301,48 @@
 				}
 			},
 			"name": "compile_if",
+			"patterns": [
+				{
+					"include": "#function_context"
+				}
+			]
+		},
+		"namespace_context.shorthand_compile_if": {
+			"match": "^\\s*(!)\\s*(.+?)\\s*{\\s*$",
+			"captures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "source.js"
+						}
+					]
+				}
+			},
+			"name": "shorthand_compile_if",
+			"patterns": [
+				{
+					"include": "#namespace_context"
+				}
+			]
+		},
+		"function_context.shorthand_compile_if": {
+			"match": "^\\s*(!)\\s*(.+?)\\s*{\\s*$",
+			"captures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "source.js"
+						}
+					]
+				}
+			},
+			"name": "shorthand_compile_if",
 			"patterns": [
 				{
 					"include": "#function_context"
@@ -552,19 +622,53 @@
 				"2": {
 					"patterns": [
 						{
-							"begin": "(?<=[ \\(])",
-							"end": "[\\( ]",
-							"patterns": [
-								{
-									"include": "source.mcfunction.command.tokens"
-								}
-							]
+							"include": "source.mcfunction"
 						}
 					]
 				}
 			},
-			"end": "^\\s*}\\s*$",
+			"end": "^\\s*}",
 			"name": "execute_if_block",
+			"patterns": [
+				{
+					"include": "#mcfunction_fix"
+				}
+			]
+		},
+		"execute_if_else_block": {
+			"begin": "(?<=\\})\\s*(else) (execute)\\s*\\((.+)\\)\\s*{\\s*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"name": "keyword.control"
+				},
+				"3": {
+					"patterns": [
+						{
+							"include": "source.mcfunction"
+						}
+					]
+				}
+			},
+			"end": "^\\s*}",
+			"name": "execute_if_else_block",
+			"patterns": [
+				{
+					"include": "#mcfunction_fix"
+				}
+			]
+		},
+		"execute_else_block": {
+			"begin": "(?<=\\})\\s*(else)\\s*{\\s*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				}
+			},
+			"end": "^\\s*}\\s*$",
+			"name": "execute_else_block",
 			"patterns": [
 				{
 					"include": "#mcfunction_fix"

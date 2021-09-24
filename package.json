@@ -13,12 +13,24 @@
 		"languages": [
 			{
 				"id": "lang-mc",
-				"aliases": [ "MCBuild:lang-mc", "lang-mc" ],
-				"extensions": [ ".mc" ],
+				"aliases": [
+					"MCBuild:lang-mc",
+					"lang-mc"
+				],
+				"extensions": [
+					".mc"
+				],
 				"configuration": "./language-configuration.json"
 			}
 		],
 		"grammars": [
+			{
+				"path": "./syntaxes/mcfunction.tmLanguage.json",
+				"scopeName": "source.mcfunction",
+				"injectTo": [
+					"source.mcfunction"
+				]
+			},
 			{
 				"language": "lang-mc",
 				"scopeName": "source.lang-mc",
