@@ -118,6 +118,10 @@
 				}
 			]
 		},
+		"json_ref_list":{
+			"match": "^\\s*(.+)\\s*$",
+			"name": "entity.name.function"
+		},
 		"dir_def": {
 			"begin": "^\\s*(dir) ([\\S]+) {\\s*$",
 			"end": "^\\s*}\\s*$",
@@ -442,7 +446,7 @@
 			]
 		},
 		"entity_type_def": {
-			"begin": "^\\s*(entities) (.+)\\s*{\\s*$",
+			"begin": "^\\s*(entities) (\\S+)( true | false)?\\s*{\\s*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -454,18 +458,21 @@
 							"include": "#inline_script"
 						}
 					]
+				},
+				"3": {
+					"name": "constant.numeric"
 				}
 			},
 			"end": "^\\s*}\\s*$",
 			"name": "entity_type_def",
 			"patterns": [
 				{
-					"include": "source.json"
+					"include": "#json_ref_list"
 				}
 			]
 		},
 		"function_tag_def": {
-			"begin": "^\\s*(functions) (.+)\\s*{\\s*$",
+			"begin": "^\\s*(functions) (\\S+)( true | false)?\\s*{\\s*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -477,13 +484,16 @@
 							"include": "#inline_script"
 						}
 					]
+				},
+				"3": {
+					"name": "constant.numeric"
 				}
 			},
 			"end": "^\\s*}\\s*$",
 			"name": "function_tag_def",
 			"patterns": [
 				{
-					"include": "source.json"
+					"include": "#json_ref_list"
 				}
 			]
 		},
@@ -511,7 +521,7 @@
 			]
 		},
 		"block_type_def": {
-			"begin": "^\\s*(blocks) (.+)\\s*{\\s*$",
+			"begin": "^\\s*(blocks) (\\S+)( true | false)?\\s*{\\s*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -523,18 +533,21 @@
 							"include": "#inline_script"
 						}
 					]
+				},
+				"3": {
+					"name": "constant.numeric"
 				}
 			},
 			"end": "^\\s*}\\s*$",
 			"name": "block_type_def",
 			"patterns": [
 				{
-					"include": "source.json"
+					"include": "#json_ref_list"
 				}
 			]
 		},
 		"item_type_def": {
-			"begin": "^\\s*(items) (.+)\\s*{\\s*$",
+			"begin": "^\\s*(items) (\\S+)( true | false)?\\s*{\\s*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -543,21 +556,24 @@
 					"name": "entity.name.function",
 					"patterns": [
 						{
-							"include": "#inline_script"
+							"include": "#incline_script"
 						}
 					]
+				},
+				"3": {
+					"name": "constant.numeric"
 				}
 			},
 			"end": "^\\s*}\\s*$",
 			"name": "item_type_def",
 			"patterns": [
 				{
-					"include": "source.json"
+					"include": "#json_ref_list"
 				}
 			]
 		},
 		"fluid_type_def": {
-			"begin": "^\\s*(fluids) (.+)\\s*{\\s*$",
+			"begin": "^\\s*(fluids) (\\S+)( true | false)?\\s*{\\s*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -569,13 +585,16 @@
 							"include": "#inline_script"
 						}
 					]
+				},
+				"3": {
+					"name": "constant.numeric"
 				}
 			},
 			"end": "^\\s*}\\s*$",
 			"name": "fluid_type_def",
 			"patterns": [
 				{
-					"include": "source.json"
+					"include": "#json_ref_list"
 				}
 			]
 		},
