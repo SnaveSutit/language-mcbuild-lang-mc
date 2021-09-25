@@ -10,9 +10,6 @@
 		"mcfunction_fix": {
 			"patterns": [
 				{
-					"match": "\n"
-				},
-				{
 					"include": "source.mcfunction"
 				}
 			]
@@ -662,7 +659,7 @@
 			"name": "execute_if_block",
 			"patterns": [
 				{
-					"include": "#mcfunction_fix"
+					"include": "#function_context"
 				}
 			]
 		},
@@ -687,7 +684,7 @@
 			"name": "execute_if_else_block",
 			"patterns": [
 				{
-					"include": "#mcfunction_fix"
+					"include": "#function_context"
 				}
 			]
 		},
@@ -702,7 +699,7 @@
 			"name": "execute_else_block",
 			"patterns": [
 				{
-					"include": "#mcfunction_fix"
+					"include": "#function_context"
 				}
 			]
 		},

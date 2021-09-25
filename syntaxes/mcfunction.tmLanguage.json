@@ -155,8 +155,11 @@
 		"command": {
 			"patterns": [
 				{
+					"match":"\n"
+				},
+				{
 					"name": "meta.command.mcfunction",
-					"begin": "\\s*([a-z_][a-z0-9_]*)[ \\n]",
+					"begin": "[ \t]*([a-z_][a-z0-9_]*)[ \\n]",
 					"end": "$",
 					"beginCaptures": {
 						"1": {
