@@ -29,7 +29,8 @@
 					"lang-mc"
 				],
 				"extensions": [
-					".mc"
+					".mc",
+					".mcm"
 				],
 				"configuration": "./language-configuration.json"
 			}

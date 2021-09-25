@@ -7,23 +7,16 @@
 		}
 	],
 	"repository": {
-		"mcfunction_fix": {
-			"patterns": [
-				{
-					"include": "source.mcfunction"
-				}
-			]
-		},
 		"namespace_context": {
 			"patterns": [
+				{
+					"include": "#multiline_comment"
+				},
 				{
 					"include": "#comment"
 				},
 				{
-					"include": "#inline_script"
-				},
-				{
-					"include": "#multiline_script"
+					"include": "#macro_def"
 				},
 				{
 					"include": "#dir_def"
@@ -78,19 +71,25 @@
 		"function_context": {
 			"patterns": [
 				{
+					"include": "#multiline_comment"
+				},
+				{
 					"include": "#inline_script"
 				},
 				{
 					"include": "#multiline_script"
 				},
 				{
-					"include": "#namespace_context.compile_if"
+					"include": "#function_context.compile_if"
 				},
 				{
 					"include": "#function_context.compile_loop"
 				},
 				{
-					"include": "#function_context.shorthand_compile_if"
+					"include": "#load_block"
+				},
+				{
+					"include": "#tick_block"
 				},
 				{
 					"include": "#schedule_block"
@@ -111,17 +110,77 @@
 					"include": "#execute_else_block"
 				},
 				{
-					"include": "#mcfunction_fix"
+					"include": "source.mcfunction"
 				}
 			]
 		},
-		"json_ref_list":{
-			"match": "^\\s*(.+)\\s*$",
+		"json_ref_list": {
+			"match": "^[ \t]*(.+)[ \n]+$",
 			"name": "entity.name.function"
 		},
+		"multiline_comment": {
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(###)(.+)?$",
+			"beginCaptures": {
+				"0": {
+					"name": "comment.block"
+				}
+			},
+			"end": "^[ \t]*(###)(.+)?$",
+			"endCaptures": {
+				"0": {
+					"name": "comment.block"
+				}
+			},
+			"name": "comment.block"
+		},
+		"macro_def": {
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(macro) (\\S+)\\s*{[ \n]*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				}
+			},
+			"end": "^[ \t]*} *",
+			"name": "macro_def",
+			"patterns": [
+				{
+					"include": "#function_context"
+				}
+			]
+		},
+		"tick_block": {
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(tick)\\s*{[ \n]*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				}
+			},
+			"end": "^[ \t]*} *",
+			"name": "tick_block",
+			"patterns": [
+				{
+					"include": "#function_context"
+				}
+			]
+		},
+		"load_block": {
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(load)\\s*{[ \n]*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				}
+			},
+			"end": "^[ \t]*} *",
+			"name": "load_block",
+			"patterns": [
+				{
+					"include": "#function_context"
+				}
+			]
+		},
 		"dir_def": {
-			"begin": "^\\s*(dir) ([\\S]+) {\\s*$",
-			"end": "^\\s*}\\s*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(dir) ([\\S]+) {[ \n]*$",
+			"end": "^[ \t]*} *",
 			"captures": {
 				"1": {
 					"name": "keyword.control.dir"
@@ -143,8 +202,8 @@
 			]
 		},
 		"function_def": {
-			"begin": "^\\s*(function) (.+)\\s*{\\s*$",
-			"end": "^\\s*}\\s*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(function) (.+)\\s*{[ \n]*$",
+			"end": "^[ \t]*} *",
 			"captures": {
 				"1": {
 					"name": "keyword.control.function"
@@ -166,7 +225,7 @@
 			]
 		},
 		"comment": {
-			"match": "^\\s*(#.+)$",
+			"match": "^[ \t]*(#.+)$",
 			"captures": {
 				"1": {
 					"patterns": [
@@ -179,8 +238,8 @@
 			"name": "comment.line"
 		},
 		"multiline_script": {
-			"begin": "^\\s*<%%\\s*$",
-			"end": "^\\s*%%>\\s*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))<%%[ \n]+$",
+			"end": "^[ \t]*%%>[ \n]+$",
 			"beginCaptures": {
 				"0": {
 					"name": "punctuation.paren.open"
@@ -220,8 +279,9 @@
 			"name": "inline_script"
 		},
 		"namespace_context.compile_loop": {
-			"match": "^\\s*(LOOP)\\s*\\((.+)\\)\\s*{\\s*$",
-			"captures": {
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(LOOP)\\s*\\((.+)\\)\\s*{[ \n]*$",
+			"end": "^[ \t]*} *",
+			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
 				},
@@ -233,7 +293,7 @@
 					]
 				}
 			},
-			"name": "compile_loop",
+			"name": "namespace_context.compile_loop",
 			"patterns": [
 				{
 					"include": "#namespace_context"
@@ -241,8 +301,9 @@
 			]
 		},
 		"function_context.compile_loop": {
-			"match": "^\\s*(LOOP)\\s*\\((.+)\\)\\s*{\\s*$",
-			"captures": {
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(LOOP)\\s*\\((.+)\\)\\s*{[ \n]*$",
+			"end": "^[ \t]*} *",
+			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
 				},
@@ -254,7 +315,7 @@
 					]
 				}
 			},
-			"name": "compile_loop",
+			"name": "function_context.compile_loop",
 			"patterns": [
 				{
 					"include": "#function_context"
@@ -279,8 +340,9 @@
 			"name": "compile_loop"
 		},
 		"namespace_context.compile_if": {
-			"match": "^\\s*(IF)\\s*\\((.+)\\)\\s*{\\s*$",
-			"captures": {
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(!IF)\\s*\\((.+)\\)\\s*{[ \n]*$",
+			"end": "^[ \t]*} *",
+			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
 				},
@@ -292,7 +354,7 @@
 					]
 				}
 			},
-			"name": "compile_if",
+			"name": "namespace_context.compile_if",
 			"patterns": [
 				{
 					"include": "#namespace_context"
@@ -300,8 +362,9 @@
 			]
 		},
 		"function_context.compile_if": {
-			"match": "^\\s*(IF)\\s*\\((.+)\\)\\s*{\\s*$",
-			"captures": {
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(!IF)\\s*\\((.+)\\)\\s*{[ \n]*$",
+			"end": "^[ \t]*} *",
+			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
 				},
@@ -313,7 +376,7 @@
 					]
 				}
 			},
-			"name": "compile_if",
+			"name": "function_context.compile_if",
 			"patterns": [
 				{
 					"include": "#function_context"
@@ -321,8 +384,9 @@
 			]
 		},
 		"namespace_context.shorthand_compile_if": {
-			"match": "^\\s*(!)\\s*(.+?)\\s*{\\s*$",
-			"captures": {
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(!)\\s*(.+?)\\s*{[ \n]*$",
+			"end": "^[ \t]*} *",
+			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
 				},
@@ -342,8 +406,9 @@
 			]
 		},
 		"function_context.shorthand_compile_if": {
-			"match": "^\\s*(!)\\s*(.+?)\\s*{\\s*$",
-			"captures": {
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(!)\\s*(.+?)\\s*{[ \n]*$",
+			"end": "^[ \t]*} *",
+			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
 				},
@@ -363,7 +428,7 @@
 			]
 		},
 		"execute_run_block": {
-			"begin": "(^\\s*execute.* run\\s*){\\s*$",
+			"begin": "(^[ \t]*execute.* run\\s*){[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"patterns": [
@@ -373,7 +438,7 @@
 					]
 				}
 			},
-			"end": "^\\s*}\\s*$",
+			"end": "^[ \t]*} *",
 			"name": "execute_run_block",
 			"patterns": [
 				{
@@ -382,13 +447,13 @@
 			]
 		},
 		"function_block": {
-			"begin": "^\\s*(block)\\s*{\\s*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(block\\s*)?{[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
 				}
 			},
-			"end": "^\\s*}\\s*$",
+			"end": "^[ \t]*} *",
 			"name": "function_block",
 			"patterns": [
 				{
@@ -397,7 +462,7 @@
 			]
 		},
 		"loot_table_def": {
-			"begin": "^\\s*(loot) (.+)\\s*{\\s*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(loot) (.+)\\s*{[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -411,7 +476,7 @@
 					]
 				}
 			},
-			"end": "^\\s*}\\s*$",
+			"end": "^[ \t]*} *",
 			"name": "loot_table_def",
 			"patterns": [
 				{
@@ -420,7 +485,7 @@
 			]
 		},
 		"advancement_def": {
-			"begin": "^\\s*(advancement) (.+)\\s*{\\s*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(advancement) (.+)\\s*{[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -434,7 +499,7 @@
 					]
 				}
 			},
-			"end": "^\\s*}\\s*$",
+			"end": "^[ \t]*} *",
 			"name": "advancement_def",
 			"patterns": [
 				{
@@ -443,7 +508,7 @@
 			]
 		},
 		"entity_type_def": {
-			"begin": "^\\s*(entities) (\\S+)( true | false)?\\s*{\\s*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(entities) (\\S+)( true | false)?\\s*{[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -460,7 +525,7 @@
 					"name": "constant.numeric"
 				}
 			},
-			"end": "^\\s*}\\s*$",
+			"end": "^[ \t]*} *",
 			"name": "entity_type_def",
 			"patterns": [
 				{
@@ -469,7 +534,7 @@
 			]
 		},
 		"function_tag_def": {
-			"begin": "^\\s*(functions) (\\S+)( true | false)?\\s*{\\s*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(functions) (\\S+)( true | false)?\\s*{[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -486,7 +551,7 @@
 					"name": "constant.numeric"
 				}
 			},
-			"end": "^\\s*}\\s*$",
+			"end": "^[ \t]*} *",
 			"name": "function_tag_def",
 			"patterns": [
 				{
@@ -495,7 +560,7 @@
 			]
 		},
 		"item_modifier_def": {
-			"begin": "^\\s*(modifier) (.+)\\s*{\\s*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(modifier) (.+)\\s*{[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -509,7 +574,7 @@
 					]
 				}
 			},
-			"end": "^\\s*}\\s*$",
+			"end": "^[ \t]*} *",
 			"name": "item_modifier_def",
 			"patterns": [
 				{
@@ -518,7 +583,7 @@
 			]
 		},
 		"block_type_def": {
-			"begin": "^\\s*(blocks) (\\S+)( true | false)?\\s*{\\s*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(blocks) (\\S+)( true | false)?\\s*{[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -535,7 +600,7 @@
 					"name": "constant.numeric"
 				}
 			},
-			"end": "^\\s*}\\s*$",
+			"end": "^[ \t]*} *",
 			"name": "block_type_def",
 			"patterns": [
 				{
@@ -544,7 +609,7 @@
 			]
 		},
 		"item_type_def": {
-			"begin": "^\\s*(items) (\\S+)( true | false)?\\s*{\\s*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(items) (\\S+)( true | false)?\\s*{[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -561,7 +626,7 @@
 					"name": "constant.numeric"
 				}
 			},
-			"end": "^\\s*}\\s*$",
+			"end": "^[ \t]*} *",
 			"name": "item_type_def",
 			"patterns": [
 				{
@@ -570,7 +635,7 @@
 			]
 		},
 		"fluid_type_def": {
-			"begin": "^\\s*(fluids) (\\S+)( true | false)?\\s*{\\s*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(fluids) (\\S+)( true | false)?\\s*{[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -587,7 +652,7 @@
 					"name": "constant.numeric"
 				}
 			},
-			"end": "^\\s*}\\s*$",
+			"end": "^[ \t]*} *",
 			"name": "fluid_type_def",
 			"patterns": [
 				{
@@ -596,7 +661,7 @@
 			]
 		},
 		"predicate_def": {
-			"begin": "^\\s*(predicate) (.+)\\s*{\\s*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(predicate) (.+)\\s*{[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -610,7 +675,7 @@
 					]
 				}
 			},
-			"end": "^\\s*}\\s*$",
+			"end": "^[ \t]*} *",
 			"name": "predicate_def",
 			"patterns": [
 				{
@@ -619,7 +684,7 @@
 			]
 		},
 		"recipe_def": {
-			"begin": "^\\s*(recipe) (.+)\\s*{\\s*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(recipe) (.+)\\s*{[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -633,7 +698,7 @@
 					]
 				}
 			},
-			"end": "^\\s*}\\s*$",
+			"end": "^[ \t]*} *",
 			"name": "recipe_def",
 			"patterns": [
 				{
@@ -642,7 +707,7 @@
 			]
 		},
 		"execute_if_block": {
-			"begin": "^\\s*(execute)\\s*\\((.+)\\)\\s*{\\s*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(execute)\\s*\\((.+)\\)\\s*{[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -655,7 +720,7 @@
 					]
 				}
 			},
-			"end": "^\\s*}",
+			"end": "^[ \t]*}",
 			"name": "execute_if_block",
 			"patterns": [
 				{
@@ -664,7 +729,7 @@
 			]
 		},
 		"execute_if_else_block": {
-			"begin": "(?<=\\})\\s*(else) (execute)\\s*\\((.+)\\)\\s*{\\s*$",
+			"begin": "(?<=\\})\\s*(else) (execute)\\s*\\((.+)\\)\\s*{[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -680,7 +745,7 @@
 					]
 				}
 			},
-			"end": "^\\s*}",
+			"end": "^[ \t]*}",
 			"name": "execute_if_else_block",
 			"patterns": [
 				{
@@ -689,13 +754,13 @@
 			]
 		},
 		"execute_else_block": {
-			"begin": "(?<=\\})\\s*(else)\\s*{\\s*$",
+			"begin": "(?<=\\})\\s*(else)\\s*{[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
 				}
 			},
-			"end": "^\\s*}\\s*$",
+			"end": "^[ \t]*} *",
 			"name": "execute_else_block",
 			"patterns": [
 				{
@@ -704,7 +769,7 @@
 			]
 		},
 		"clock_def": {
-			"begin": "^\\s*(clock) ([\\d\\.]+(t|s|d)) {\\s*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(clock) ([\\d\\.]+(t|s|d)) {[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -713,7 +778,7 @@
 					"name": "constant.numeric"
 				}
 			},
-			"end": "^\\s*}\\s*$",
+			"end": "^[ \t]*} *",
 			"name": "clock_def",
 			"patterns": [
 				{
@@ -722,7 +787,7 @@
 			]
 		},
 		"schedule_block": {
-			"begin": "^\\s*(schedule) ([\\d\\.]+(t|s|d))( replace| append)? {\\s*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(schedule) ([\\d\\.]+(t|s|d))( replace| append)? {[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -734,7 +799,7 @@
 					"name": "entity.name"
 				}
 			},
-			"end": "^\\s*}\\s*$",
+			"end": "^[ \t]*} *",
 			"name": "schedule_block",
 			"patterns": [
 				{
