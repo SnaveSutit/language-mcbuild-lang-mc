@@ -1,8 +1,12 @@
 {
-	"name": "mcbuild-lang-mc-syntax-highlighter",
-	"displayName": "MCBuild lang-mc Syntax Highlighter",
-	"description": "highlights stuff",
-	"version": "0.0.1",
+	"name": "snavesutit.language-mcbuild-lang-mc",
+	"displayName": "language-mcbuild-lang-mc",
+	"description": "Syntax Highlighting for MCBuild's Lang-mc",
+	"icon":"icon.png",
+	"repository": "https://github.com/Arcensoth/language-mcfunction",
+	"version": "1.0.0",
+	"publisher": "SnaveSutit",
+	"license": "MIT",
 	"engines": {
 		"vscode": "^1.60.0"
 	},
