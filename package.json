@@ -25,7 +25,7 @@
 		],
 		"grammars": [
 			{
-				"path": "./syntaxes/mcfunction.tmLanguage.json",
+				"path": "./syntaxes/arcensoth.language-mcfunction/mcfunction.tmLanguage.json",
 				"scopeName": "source.mcfunction",
 				"injectTo": [
 					"source.mcfunction"
