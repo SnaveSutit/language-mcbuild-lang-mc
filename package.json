@@ -7,6 +7,13 @@
 	"version": "1.0.0",
 	"publisher": "SnaveSutit",
 	"license": "MIT",
+	"keywords": [
+		"minecraft",
+		"mc-build",
+		"MC-Build",
+		"mcbuild",
+		"mcb"
+	],
 	"engines": {
 		"vscode": "^1.60.0"
 	},
