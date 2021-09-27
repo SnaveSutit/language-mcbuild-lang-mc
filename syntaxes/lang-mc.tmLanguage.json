@@ -131,6 +131,9 @@
 					"include": "#execute_else_block"
 				},
 				{
+					"include": "#multiline_command"
+				},
+				{
 					"include": "source.mcfunction"
 				}
 			]
@@ -165,6 +168,12 @@
 				}
 			},
 			"name": "escaped_comment"
+		},
+		"multiline_command":{
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))\\([ \n]*$",
+			"end": "^[ \t]*\\) *",
+			"name":"multiline_command",
+			"patterns": [{"include": "source.js"}]
 		},
 		"macro_def": {
 			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(macro) (\\S+)\\s*{[ \n]*$",
