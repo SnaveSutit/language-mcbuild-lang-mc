@@ -1,6 +1,6 @@
 {
-	"name": "snavesutit.language-mcbuild-lang-mc",
-	"displayName": "language-mcbuild-lang-mc",
+	"name": "snavesutit-language-langmc",
+	"displayName": "SnaveSutit.language-langmc",
 	"description": "Syntax Highlighting for MCBuild's Lang-mc",
 	"icon":"icon.png",
 	"repository": "https://github.com/Arcensoth/language-mcfunction",
