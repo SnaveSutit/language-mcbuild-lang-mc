@@ -191,7 +191,7 @@
 			]
 		},
 		"tick_block": {
-			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(tick)\\s*{[ \n]*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(tick) *{[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -206,7 +206,7 @@
 			]
 		},
 		"load_block": {
-			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(load)\\s*{[ \n]*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(load) *{[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -221,7 +221,7 @@
 			]
 		},
 		"dir_def": {
-			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(dir) ([\\S]+) {[ \n]*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(dir) ([\\S]+) *{[ \n]*$",
 			"end": "^[ \t]*} *",
 			"captures": {
 				"1": {
@@ -244,7 +244,7 @@
 			]
 		},
 		"function_def": {
-			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(function) (.+)\\s*{[ \n]*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(function) ([\\S]+) *{[ \n]*$",
 			"end": "^[ \t]*} *",
 			"captures": {
 				"1": {
