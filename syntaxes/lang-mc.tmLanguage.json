@@ -898,7 +898,7 @@
 			]
 		},
 		"clock_def": {
-			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(clock) ([\\d\\.]+(t|s|d)|\\$\\$\\d+) {[ \n]*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(clock) *([\\d\\.]+(t|s|d)|\\$\\$\\d+) {[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"

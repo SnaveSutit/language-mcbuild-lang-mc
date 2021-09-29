@@ -3,8 +3,8 @@
 	"displayName": "SnaveSutit.language-langmc",
 	"description": "Syntax Highlighting for MCBuild's Lang-mc",
 	"icon":"icon.png",
-	"repository": "https://github.com/Arcensoth/language-mcfunction",
-	"version": "1.0.0",
+	"repository": "https://github.com/SnaveSutit/language-mcbuild-lang-mc",
+	"version": "1.0.2",
 	"publisher": "SnaveSutit",
 	"license": "MIT",
 	"keywords": [
