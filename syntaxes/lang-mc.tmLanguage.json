@@ -164,16 +164,17 @@
 					"name": "constant.character.escape"
 				},
 				"2": {
-					"name": "comment.line"
+					"name": "comment.line",
+					"patterns": [{"include": "#inline_script"}]
 				}
 			},
 			"name": "escaped_comment"
 		},
 		"multiline_command":{
-			"begin": "(?:^[ \t]*|(?<=}[ \t]*))\\([ \n]*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))\\( *$",
 			"end": "^[ \t]*\\) *",
 			"name":"multiline_command",
-			"patterns": [{"include": "source.js"}]
+			"patterns": [{"include": "source.mcfunction"}]
 		},
 		"macro_def": {
 			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(macro) (\\S+)\\s*{[ \n]*$",
@@ -221,7 +222,7 @@
 			]
 		},
 		"dir_def": {
-			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(dir) ([\\S]+) *{[ \n]*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(dir) ([\\S ]+) *{[ \n]*$",
 			"end": "^[ \t]*} *",
 			"captures": {
 				"1": {
@@ -244,7 +245,7 @@
 			]
 		},
 		"function_def": {
-			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(function) ([\\S]+) *{[ \n]*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(function) ([\\S ]+) *{[ \n]*$",
 			"end": "^[ \t]*} *",
 			"captures": {
 				"1": {
