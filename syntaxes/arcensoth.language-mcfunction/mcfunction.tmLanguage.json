@@ -412,10 +412,11 @@
 		},
 		"command.token.unquoted_string": {
 			"name": "meta.command.token.unquoted_string.mcfunction",
-			"match": "(?<= )([^\\s]+)(?=[ \\n]|$)",
+			"match": "(?<= )([\\S ]+)(?=[ \\n]|$)",
 			"captures": {
 				"1": {
-					"name": "string.unquoted.mcfunction"
+					"name": "string.unquoted.mcfunction",
+					"patterns":[{"include":"#inline_script"}]
 				}
 			}
 		},
@@ -1194,10 +1195,11 @@
 		},
 		"selector.argument.unquoted_string": {
 			"name": "meta.selector.argument.unquoted_string.mcfunction",
-			"match": "([^\\s\\{\\}\\[\\]\\,\\:\\=\\!]+)(?= *[\\,\\]\\n])",
+			"match": "((?:[^\\s\\{\\}\\[\\]\\,\\:\\=\\!]| )+)(?= *[\\,\\]\\n])",
 			"captures": {
 				"1": {
-					"name": "string.unquoted.mcfunction"
+					"name": "string.unquoted.mcfunction",
+					"patterns":[{"include":"#inline_script"}]
 				}
 			}
 		},
