@@ -406,7 +406,8 @@
 			"match": "(?<= )([\\#\\$\\%]\\S+)(?=[ \\n]|$)",
 			"captures": {
 				"1": {
-					"name": "support.class.mcfunction"
+					"name": "support.class.mcfunction",
+					"patterns": [{"include":"#inline_script"}]
 				}
 			}
 		},
