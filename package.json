@@ -20,7 +20,22 @@
 	"categories": [
 		"Programming Languages"
 	],
+	"activationEvents": [
+		"onLanguage:lang-mc"
+	],
 	"contributes": {
+		"configuration":{
+			"type": "object",
+			"title": "Example config",
+			"properties": {
+				"lang-mc.maxNumberOfProblems": {
+					"scope": "resource",
+					"type": "number",
+					"default": 100,
+					"description": "Controls the maximum number of problems produced by the language server"
+				}
+			}
+		},
 		"languages": [
 			{
 				"id": "lang-mc",
