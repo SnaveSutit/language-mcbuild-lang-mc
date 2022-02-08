@@ -561,7 +561,7 @@
 			]
 		},
 		"execute_run_block": {
-			"begin": "(^[ \t]*execute.* run\\s*){[ \n]*$",
+			"begin": "(^[ \t]*execute.* run\\s*(block\\s*)?){[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"patterns": [
