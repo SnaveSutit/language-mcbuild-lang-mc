@@ -902,7 +902,7 @@
 			]
 		},
 		"clock_def": {
-			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(clock)\\s*([\\d\\.]+(t|s|d)|\\$\\$\\d+) {[ \n]*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(clock)\\s*([\\d\\.]+(t|s|d)|\\$\\$\\d+)\\s*{[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
