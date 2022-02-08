@@ -284,8 +284,8 @@
 			"name": "comment.line"
 		},
 		"multiline_script": {
-			"begin": "(?:^[ \t]*|(?<=}[ \t]*))<%%[ \n]+$",
-			"end": "^[ \t]*%%>[ \n]+$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))<%%[ \n]*",
+			"end": "[ \t]*%%>[ \n]*$",
 			"beginCaptures": {
 				"0": {
 					"name": "punctuation.paren.open"
