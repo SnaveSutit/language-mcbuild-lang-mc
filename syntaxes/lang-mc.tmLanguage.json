@@ -16,6 +16,9 @@
 					"include": "#comment"
 				},
 				{
+					"include": "#import"
+				},
+				{
 					"include": "#multiline_script"
 				},
 				{
@@ -137,9 +140,21 @@
 					"include": "#multiline_command"
 				},
 				{
-					"include": "source.mcfunction"
+					"include": "source.mcfunction2"
 				}
 			]
+		},
+		"import": {
+			"match": "^[ \t]*(import)\\s*(.+)$",
+			"name": "entity.name.function",
+			"captures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"name": "string"
+				}
+			}
 		},
 		"json_ref_list": {
 			"match": "^[ \t]*(.+)[ \n]+$",
@@ -177,7 +192,7 @@
 			"begin": "(?:^[ \t]*|(?<=}[ \t]*))\\( *$",
 			"end": "^[ \t]*\\) *",
 			"name":"multiline_command",
-			"patterns": [{"include": "source.mcfunction"}]
+			"patterns": [{"include": "source.mcfunction2"}]
 		},
 		"macro_def": {
 			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(macro) (\\S+)\\s*{[ \n]*$",
@@ -333,7 +348,7 @@
 				"2": {
 					"patterns": [
 						{
-							"include": "source.mcfunction"
+							"include": "source.mcfunction2"
 						}
 					]
 				}
@@ -358,7 +373,7 @@
 				"3": {
 					"patterns": [
 						{
-							"include": "source.mcfunction"
+							"include": "source.mcfunction2"
 						}
 					]
 				},
@@ -389,7 +404,7 @@
 				"2": {
 					"patterns": [
 						{
-							"include": "source.mcfunction"
+							"include": "source.mcfunction2"
 						}
 					]
 				},
@@ -566,7 +581,7 @@
 				"1": {
 					"patterns": [
 						{
-							"include": "source.mcfunction"
+							"include": "source.mcfunction2"
 						}
 					]
 				}
@@ -848,7 +863,7 @@
 				"2": {
 					"patterns": [
 						{
-							"include": "source.mcfunction"
+							"include": "source.mcfunction2"
 						}
 					]
 				}
@@ -873,7 +888,7 @@
 				"3": {
 					"patterns": [
 						{
-							"include": "source.mcfunction"
+							"include": "source.mcfunction2"
 						}
 					]
 				}

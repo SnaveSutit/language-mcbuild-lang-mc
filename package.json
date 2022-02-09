@@ -50,9 +50,9 @@
 		"grammars": [
 			{
 				"path": "./syntaxes/arcensoth.language-mcfunction/mcfunction.tmLanguage.json",
-				"scopeName": "source.mcfunction",
+				"scopeName": "source.mcfunction2",
 				"injectTo": [
-					"source.mcfunction"
+					"source.mcfunction2"
 				]
 			},
 			{
@@ -62,7 +62,7 @@
 				"embeddedLanguages": {
 					"meta.embedded.block.javascript": "javascript",
 					"meta.embedded.block.json": "json",
-					"meta.embedded.block.mcfunction": "mcfunction"
+					"meta.embedded.block.mcfunction": "mcfunction2"
 				}
 			}
 		]
