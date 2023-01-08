@@ -183,16 +183,16 @@
 				},
 				"2": {
 					"name": "comment.line",
-					"patterns": [{"include": "#inline_script"}]
+					"patterns": [{ "include": "#inline_script" }]
 				}
 			},
 			"name": "escaped_comment"
 		},
-		"multiline_command":{
+		"multiline_command": {
 			"begin": "(?:^[ \t]*|(?<=}[ \t]*))\\( *$",
 			"end": "^[ \t]*\\) *",
-			"name":"multiline_command",
-			"patterns": [{"include": "source.mcfunction2"}]
+			"name": "multiline_command",
+			"patterns": [{ "include": "source.mcfunction2" }]
 		},
 		"macro_def": {
 			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(macro) (\\S+)\\s*{[ \n]*$",
@@ -488,7 +488,7 @@
 			"name": "compile_loop"
 		},
 		"namespace_context.compile_if": {
-			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(!IF)\\s*\\((.+)\\)\\s*{[ \n]*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(!?IF)\\s*\\((.+)\\)\\s*{[ \n]*$",
 			"end": "^[ \t]*} *",
 			"beginCaptures": {
 				"1": {
@@ -510,7 +510,7 @@
 			]
 		},
 		"function_context.compile_if": {
-			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(!IF)\\s*\\((.+)\\)\\s*{[ \n]*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(!?IF)\\s*\\((.+)\\)\\s*{[ \n]*$",
 			"end": "^[ \t]*} *",
 			"beginCaptures": {
 				"1": {
