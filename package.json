@@ -2,9 +2,9 @@
 	"name": "snavesutit-language-langmc",
 	"displayName": "SnaveSutit.language-langmc",
 	"description": "Syntax Highlighting for MCBuild's Lang-mc",
-	"icon":"icon.png",
+	"icon": "icon.png",
 	"repository": "https://github.com/SnaveSutit/language-mcbuild-lang-mc",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"publisher": "SnaveSutit",
 	"license": "MIT",
 	"keywords": [
@@ -17,11 +17,18 @@
 	"engines": {
 		"vscode": "^1.60.0"
 	},
+	"scripts": {
+		"lint": "prettier --write .",
+		"version_patch": "yarn version --new-version patch",
+		"version_minor": "yarn version --new-version minor",
+		"version_major": "yarn version --new-version major",
+		"update": "vsce publish"
+	},
 	"categories": [
 		"Programming Languages"
 	],
 	"contributes": {
-		"configuration":{
+		"configuration": {
 			"type": "object",
 			"title": "Example config",
 			"properties": {
