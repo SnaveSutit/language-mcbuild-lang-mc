@@ -64,6 +64,12 @@
 					"include": "#item_modifier_def"
 				},
 				{
+					"include": "#dimension_def"
+				},
+				{
+					"include": "#worldgen_def"
+				},
+				{
 					"include": "#namespace_context.compile_if"
 				},
 				{
@@ -848,6 +854,52 @@
 			},
 			"end": "^[ \t]*} *",
 			"name": "recipe_def",
+			"patterns": [
+				{
+					"include": "source.json"
+				}
+			]
+		},
+		"dimension_def": {
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(dimension) (.+)\\s*{[ \n]*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"name": "entity.name.function",
+					"patterns": [
+						{
+							"include": "#inline_script"
+						}
+					]
+				}
+			},
+			"end": "^[ \t]*} *",
+			"name": "dimension_def",
+			"patterns": [
+				{
+					"include": "source.json"
+				}
+			]
+		},
+		"worldgen_def": {
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(worldgen) (.+)\\s*{[ \n]*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"name": "entity.name.function",
+					"patterns": [
+						{
+							"include": "#inline_script"
+						}
+					]
+				}
+			},
+			"end": "^[ \t]*} *",
+			"name": "worldgen_def",
 			"patterns": [
 				{
 					"include": "source.json"
