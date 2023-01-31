@@ -1,9 +1,7 @@
 {
 	"name": "mcfunction2",
 	"scopeName": "source.mcfunction2",
-	"fileTypes": [
-		"mcfunction"
-	],
+	"fileTypes": ["mcfunction"],
 	"patterns": [
 		{
 			"include": "#inline_script"
@@ -155,7 +153,7 @@
 		"command": {
 			"patterns": [
 				{
-					"match":"\n"
+					"match": "\n"
 				},
 				{
 					"name": "meta.command.mcfunction",
@@ -407,7 +405,7 @@
 			"captures": {
 				"1": {
 					"name": "support.class.mcfunction",
-					"patterns": [{"include":"#inline_script"}]
+					"patterns": [{ "include": "#inline_script" }]
 				}
 			}
 		},
@@ -417,7 +415,7 @@
 			"captures": {
 				"1": {
 					"name": "string.unquoted.mcfunction",
-					"patterns":[{"include":"#inline_script"}]
+					"patterns": [{ "include": "#inline_script" }]
 				}
 			}
 		},
@@ -1200,7 +1198,7 @@
 			"captures": {
 				"1": {
 					"name": "string.unquoted.mcfunction",
-					"patterns":[{"include":"#inline_script"}]
+					"patterns": [{ "include": "#inline_script" }]
 				}
 			}
 		},
