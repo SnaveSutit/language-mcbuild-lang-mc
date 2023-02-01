@@ -64,6 +64,9 @@
 					"include": "#item_modifier_def"
 				},
 				{
+					"include": "#dimension_type_def"
+				},
+				{
 					"include": "#dimension_def"
 				},
 				{
@@ -877,6 +880,29 @@
 			},
 			"end": "^[ \t]*} *",
 			"name": "dimension_def",
+			"patterns": [
+				{
+					"include": "source.json"
+				}
+			]
+		},
+		"dimension_type_def": {
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(dimension_type) (.+)\\s*{[ \n]*$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"name": "entity.name.function",
+					"patterns": [
+						{
+							"include": "#inline_script"
+						}
+					]
+				}
+			},
+			"end": "^[ \t]*} *",
+			"name": "dimension_type_def",
 			"patterns": [
 				{
 					"include": "source.json"
