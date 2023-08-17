@@ -49,14 +49,16 @@
 				],
 				"extensions": [
 					".mc",
-					".mcm"
+					".mcm",
+					".mcb",
+					".mcmb"
 				],
 				"configuration": "./language-configuration.json"
 			}
 		],
 		"grammars": [
 			{
-				"path": "./syntaxes/arcensoth.language-mcfunction/mcfunction.tmLanguage.json",
+				"path": "./syntaxes/language-mcfunction/mcfunction.tmLanguage.json",
 				"scopeName": "source.mcfunction2",
 				"injectTo": [
 					"source.mcfunction2"

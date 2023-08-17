@@ -328,14 +328,15 @@
 				}
 			]
 		},
+
 		"inline_script": {
-			"match": "(<%)(.*?)?(%>)",
+			"match": "(<%)(.+?)(%>)",
 			"captures": {
 				"1": {
-					"name": "constant.character"
+					"name": "punctuation.definition.template-expression.begin.lang-mc"
 				},
 				"2": {
-					"name": "meta.embedded.block.javascript",
+					"name": "inline-js",
 					"patterns": [
 						{
 							"include": "source.js"
@@ -343,11 +344,12 @@
 					]
 				},
 				"3": {
-					"name": "constant.character"
+					"name": "punctuation.definition.template-expression.end.lang-mc"
 				}
 			},
 			"name": "inline_script"
 		},
+
 		"while_loop": {
 			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(while)\\((.+)\\) *{[ \n]*$",
 			"beginCaptures": {
