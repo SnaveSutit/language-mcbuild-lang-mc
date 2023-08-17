@@ -4,7 +4,7 @@
 	"description": "Syntax Highlighting for MCBuild's Lang-mc",
 	"icon": "icon.png",
 	"repository": "https://github.com/SnaveSutit/language-mcbuild-lang-mc",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"publisher": "SnaveSutit",
 	"license": "MIT",
 	"keywords": [
