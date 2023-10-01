@@ -149,7 +149,7 @@
 					"include": "#multiline_command"
 				},
 				{
-					"include": "source.mcfunction2"
+					"include": "source.injected-mcfunction"
 				}
 			]
 		},
@@ -201,7 +201,7 @@
 			"begin": "(?:^[ \t]*|(?<=}[ \t]*))\\( *$",
 			"end": "^[ \t]*\\) *",
 			"name": "multiline_command",
-			"patterns": [{ "include": "source.mcfunction2" }]
+			"patterns": [{ "include": "source.injected-mcfunction" }]
 		},
 		"macro_def": {
 			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(macro) (\\S+)\\s*{[ \n]*$",
@@ -359,7 +359,7 @@
 				"2": {
 					"patterns": [
 						{
-							"include": "source.mcfunction2"
+							"include": "source.injected-mcfunction"
 						}
 					]
 				}
@@ -384,7 +384,7 @@
 				"3": {
 					"patterns": [
 						{
-							"include": "source.mcfunction2"
+							"include": "source.injected-mcfunction"
 						}
 					]
 				},
@@ -415,7 +415,7 @@
 				"2": {
 					"patterns": [
 						{
-							"include": "source.mcfunction2"
+							"include": "source.injected-mcfunction"
 						}
 					]
 				},
@@ -592,7 +592,7 @@
 				"1": {
 					"patterns": [
 						{
-							"include": "source.mcfunction2"
+							"include": "source.injected-mcfunction"
 						}
 					]
 				}
@@ -943,7 +943,7 @@
 				"2": {
 					"patterns": [
 						{
-							"include": "source.mcfunction2"
+							"include": "source.injected-mcfunction"
 						}
 					]
 				}
@@ -968,7 +968,7 @@
 				"3": {
 					"patterns": [
 						{
-							"include": "source.mcfunction2"
+							"include": "source.injected-mcfunction"
 						}
 					]
 				}

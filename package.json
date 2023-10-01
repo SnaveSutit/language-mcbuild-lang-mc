@@ -4,7 +4,7 @@
 	"description": "Syntax Highlighting for MCBuild's Lang-mc",
 	"icon": "icon.png",
 	"repository": "https://github.com/SnaveSutit/language-mcbuild-lang-mc",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"publisher": "SnaveSutit",
 	"license": "MIT",
 	"keywords": [
@@ -19,6 +19,7 @@
 	},
 	"scripts": {
 		"lint": "prettier --write .",
+		"build-mcfunction": "node ./.tools/inject-mcfunction.js",
 		"version_patch": "yarn version --new-version patch",
 		"version_minor": "yarn version --new-version minor",
 		"version_major": "yarn version --new-version major",
@@ -58,10 +59,10 @@
 		],
 		"grammars": [
 			{
-				"path": "./syntaxes/language-mcfunction/mcfunction.tmLanguage.json",
-				"scopeName": "source.mcfunction2",
+				"path": "./syntaxes/syntax-mcfunction/mcfunction.tmLanguage.json",
+				"scopeName": "source.injected-mcfunction",
 				"injectTo": [
-					"source.mcfunction2"
+					"source.injected-mcfunction"
 				]
 			},
 			{
