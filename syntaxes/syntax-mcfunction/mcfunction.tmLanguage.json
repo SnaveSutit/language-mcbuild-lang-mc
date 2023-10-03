@@ -65,7 +65,7 @@
 							"name": "comment.line.mcfunction"
 						}
 					},
-					"match": "#.*$",
+					"match": "#(?!<%).*$",
 					"name": "meta.comments"
 				}
 			]
