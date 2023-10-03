@@ -587,9 +587,16 @@
 			]
 		},
 		"execute_run_block": {
-			"begin": "(^[ \t]*execute.* run\\s*(block\\s*)?){[ \n]*$",
+			"begin": "(^[ \t]*execute.* run\\s*(block\\s*)?){(\\s*({|with).+)?[ \n]*$",
 			"beginCaptures": {
 				"1": {
+					"patterns": [
+						{
+							"include": "source.injected-mcfunction"
+						}
+					]
+				},
+				"3": {
 					"patterns": [
 						{
 							"include": "source.injected-mcfunction"
@@ -606,10 +613,17 @@
 			]
 		},
 		"function_block": {
-			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(block|(?<=} *)finally)? *{[ \n]*$",
+			"begin": "(?:^[ \t]*|(?<=}[ \t]*))(block|(?<=} *)finally)? *{(\\s*({|with).+)?[ \n]*$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "source.injected-mcfunction"
+						}
+					]
 				}
 			},
 			"end": "^[ \t]*} *",
