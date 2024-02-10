@@ -41,8 +41,10 @@ function inject_lang_mc_syntax(json) {
 	json.repository['property'].patterns.forEach(pattern => {
 		pattern.patterns.unshift(INCLUDE_INLINE_JS)
 	})
+	// FIXME These will need to change every time they are updated in the original mcfunction syntax.
+	json.repository['resource-name'].patterns[0].match = '#?[a-z_][a-z\\_\\.\\-]*:((<%)(.+?)(%>))?[a-z0-9_\\.\\/\\-]+'
 	// Fix inline comments incorrectly ignoring inline-js blocks.
-	json.repository.comments.patterns[1].match = '#(?!<%).*$'
+	json.repository.comments.patterns[1].match = '$#(?!<%).*$'
 }
 
 async function main() {

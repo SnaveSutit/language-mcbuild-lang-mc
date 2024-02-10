@@ -71,7 +71,7 @@
 							"name": "comment.line.mcfunction"
 						}
 					},
-					"match": "#(?!<%).*$",
+					"match": "$#(?!<%).*$",
 					"name": "meta.comments"
 				}
 			]
@@ -625,7 +625,7 @@
 							"name": "entity.name.function.mcfunction"
 						}
 					},
-					"match": "#?[a-z_][a-z_.-]*:[a-z0-9_./-]+",
+					"match": "#?[a-z_][a-z\\_\\.\\-]*:((<%)(.+?)(%>))?[a-z0-9_\\.\\/\\-]+",
 					"name": "meta.resource-name"
 				},
 				{
