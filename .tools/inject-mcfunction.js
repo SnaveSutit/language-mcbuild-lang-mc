@@ -43,6 +43,23 @@ function inject_lang_mc_syntax(json) {
 	})
 	// FIXME These will need to change every time they are updated in the original mcfunction syntax.
 	json.repository['resource-name'].patterns[0].match = '#?[a-z_][a-z\\_\\.\\-]*:((<%)(.+?)(%>))?[a-z0-9_\\.\\/\\-]+'
+
+	const doubleQuotesString = json.repository['literals'].patterns.find(
+		v => v.captures && v.captures[0] && v.captures[0].name === 'string.quoted.double.mcfunction'
+	)
+	if (!doubleQuotesString) {
+		throw new Error('Could not find doubleQuotesString')
+	}
+	doubleQuotesString.patterns.unshift(INCLUDE_INLINE_JS)
+
+	const singleQuotesString = json.repository['literals'].patterns.find(
+		v => v.captures && v.captures[0] && v.captures[0].name === 'string.quoted.single.mcfunction'
+	)
+	if (!singleQuotesString) {
+		throw new Error('Could not find singleQuotesString')
+	}
+	singleQuotesString.patterns.unshift(INCLUDE_INLINE_JS)
+
 	// Fix inline comments incorrectly ignoring inline-js blocks.
 	json.repository.comments.patterns[1].match = '$#(?!<%).*$'
 }

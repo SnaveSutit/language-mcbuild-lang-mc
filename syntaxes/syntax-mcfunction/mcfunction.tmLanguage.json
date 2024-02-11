@@ -253,6 +253,9 @@
 					"name": "meta.literals",
 					"patterns": [
 						{
+							"include": "#inline-js"
+						},
+						{
 							"include": "#literals_string-double"
 						}
 					]
@@ -268,6 +271,9 @@
 					"end": "('|$)",
 					"name": "meta.literals",
 					"patterns": [
+						{
+							"include": "#inline-js"
+						},
 						{
 							"include": "#literals_string-single"
 						}
