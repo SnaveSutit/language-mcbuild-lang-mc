@@ -1,8 +1,2 @@
-# MCBuild Lang-MC Syntax Highlighting for VSCode
+# The Official MC-Build VSCode Extension
 
-Currently Supports these MC-Build languages:
-
-- lang-mc
-- mc-extra
-- mc-math
-- .mcm

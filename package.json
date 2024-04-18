@@ -1,21 +1,20 @@
 {
 	"name": "snavesutit-language-langmc",
-	"displayName": "SnaveSutit.language-langmc",
-	"description": "Syntax Highlighting for MCBuild's Lang-mc",
+	"displayName": "MC-Build",
+	"description": "Official MCBuild VSCode Toolkit",
 	"icon": "icon.png",
 	"repository": "https://github.com/SnaveSutit/language-mcbuild-lang-mc",
 	"version": "1.4.0",
 	"publisher": "SnaveSutit",
 	"license": "MIT",
 	"keywords": [
-		"minecraft",
-		"mc-build",
+		"Minecraft",
 		"MC-Build",
-		"mcbuild",
-		"mcb"
+		"MCBuild",
+		"MCB"
 	],
 	"engines": {
-		"vscode": "^1.60.0"
+		"vscode": "^1.88.1"
 	},
 	"scripts": {
 		"lint": "prettier --write .",
@@ -29,30 +28,15 @@
 		"Programming Languages"
 	],
 	"contributes": {
-		"configuration": {
-			"type": "object",
-			"title": "Example config",
-			"properties": {
-				"lang-mc.maxNumberOfProblems": {
-					"scope": "resource",
-					"type": "number",
-					"default": 100,
-					"description": "Controls the maximum number of problems produced by the language server"
-				}
-			}
-		},
 		"languages": [
 			{
-				"id": "lang-mc",
+				"id": "mc-build",
 				"aliases": [
-					"MCBuild:lang-mc",
-					"lang-mc"
+					"MC-Build",
+					"mc-build"
 				],
 				"extensions": [
-					".mc",
-					".mcm",
-					".mcb",
-					".mcmb"
+					".mcb"
 				],
 				"configuration": "./language-configuration.json"
 			}
@@ -60,20 +44,12 @@
 		"grammars": [
 			{
 				"path": "./syntaxes/syntax-mcfunction/mcfunction.tmLanguage.json",
-				"scopeName": "source.injected-mcfunction",
-				"injectTo": [
-					"source.injected-mcfunction"
-				]
+				"scopeName": "source.injected-mcfunction"
 			},
 			{
-				"language": "lang-mc",
-				"scopeName": "source.lang-mc",
-				"path": "./syntaxes/lang-mc.tmLanguage.json",
-				"embeddedLanguages": {
-					"meta.embedded.block.javascript": "javascript",
-					"meta.embedded.block.json": "json",
-					"meta.embedded.block.mcfunction": "mcfunction2"
-				}
+				"language": "mc-build",
+				"scopeName": "source.mc-build",
+				"path": "./syntaxes/mc-build-base.tmLanguage.json"
 			}
 		]
 	},
