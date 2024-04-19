@@ -867,15 +867,18 @@
 
 		"special_function_call": {
 			"name": "meta.special_function_call",
-			"match": "\\s+(function) (?:(\\*|\\.?\\./)([a-z0-9_/]+|[a-z0-9_]:[a-z0-9_/]+)|(\\^)(\\d+))",
+			"match": "^[ \t]*(function) (#?)(?:(\\*|\\.?\\./)(.+?(?: |$))|(\\^)(\\d+))",
 			"captures": {
 				"1": {
 					"name": "keyword.control.function"
 				},
 				"2": {
-					"name": "keyword.operator"
+					"name": "entity.name.function"
 				},
 				"3": {
+					"name": "keyword.operator"
+				},
+				"4": {
 					"name": "entity.name.function",
 					"patterns": [
 						{
@@ -883,10 +886,10 @@
 						}
 					]
 				},
-				"4": {
+				"5": {
 					"name": "keyword.operator"
 				},
-				"5": {
+				"6": {
 					"name": "constant.numeric"
 				}
 			}
