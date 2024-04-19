@@ -39,6 +39,17 @@
 					".mcb"
 				],
 				"configuration": "./language-configuration.json"
+			},
+			{
+				"id": "mc-build-template",
+				"aliases": [
+					"MC-Build-Template",
+					"mc-build-template"
+				],
+				"extensions": [
+					".mcbt"
+				],
+				"configuration": "./language-configuration.json"
 			}
 		],
 		"grammars": [
@@ -50,6 +61,11 @@
 				"language": "mc-build",
 				"scopeName": "source.mc-build",
 				"path": "./syntaxes/mc-build-base.tmLanguage.json"
+			},
+			{
+				"language": "mc-build-template",
+				"scopeName": "source.mc-build-template",
+				"path": "./syntaxes/mc-build-template.tmLanguage.json"
 			}
 		]
 	},

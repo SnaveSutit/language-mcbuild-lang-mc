@@ -1,9 +1,76 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"scopeName": "source.mc-build.template",
+	"name": "mc-build-template",
+	"scopeName": "source.mc-build-template",
 	"patterns": [
 		{
-			"include": "#template"
+			"include": "source.mc-build#import"
+		},
+		{
+			"include": "#template_definition"
 		}
-	]
+	],
+	"repository": {
+		"template_definition": {
+			"name": "meta.template.definition",
+			"begin": "^[ \t]*(template) (.+?) ?{$",
+			"end": "^[ \t]*}$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"name": "entity.name.function"
+				}
+			},
+			"patterns": [
+				{
+					"include": "source.mc-build#tick/load_block"
+				},
+				{
+					"include": "#template_call_signature"
+				}
+			]
+		},
+		"template_call_signature": {
+			"name": "meta.template.call_signature",
+			"begin": "^[ \t]*(with)(.*?){$",
+			"end": "^[ \t]*}$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "#template_argument"
+						},
+						{
+							"name": "invalid.illegal",
+							"match": ".+?"
+						}
+					]
+				}
+			},
+			"patterns": [
+				{
+					"include": "source.mc-build#function_context"
+				}
+			]
+		},
+		"template_argument": {
+			"match": "(?<!:)\\b(\\w+)(?:(:)(block|float|int|js|literal|raw|word))?",
+			"captures": {
+				"1": {
+					"name": "variable.parameter"
+				},
+				"2": {
+					"name": "punctuation.separator"
+				},
+				"3": {
+					"name": "support.type"
+				}
+			}
+		}
+	}
 }
