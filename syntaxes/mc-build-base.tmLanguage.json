@@ -789,15 +789,18 @@
 
 		"schedule_block": {
 			"name": "schedule_block",
-			"begin": "^[ \t]*(schedule) (function) (.+?) ?{",
+			"begin": "^[ \t]*(\\$?)(schedule) (function) (.+?) ?{",
 			"beginCaptures": {
 				"1": {
-					"name": "keyword.control.function"
+					"name": "markup.italic"
 				},
 				"2": {
 					"name": "keyword.control.function"
 				},
 				"3": {
+					"name": "entity.name"
+				},
+				"4": {
 					"name": "entity.name.function",
 					"patterns": [
 						{
@@ -824,10 +827,13 @@
 
 		"execute": {
 			"name": "meta.execute",
-			"begin": "(^[ \t]*(execute\\b)|(\\belse execute\\b)|(else))",
+			"begin": "(^[ \t]*(\\$?)(execute\\b)|(\\belse execute\\b)|(else))",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
+				},
+				"2": {
+					"name": "markup.italic"
 				}
 			},
 			"end": " (run\\b)",
@@ -837,6 +843,9 @@
 				}
 			},
 			"patterns": [
+				{
+					"include": "#execute"
+				},
 				{
 					"include": "#execute_if_function"
 				},
@@ -854,7 +863,7 @@
 					"name": "entity.name"
 				},
 				"2": {
-					"name": "keyword.control.function"
+					"name": "entity.name"
 				}
 			},
 			"end": "^[ \t]*}",
