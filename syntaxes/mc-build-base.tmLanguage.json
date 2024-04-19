@@ -464,37 +464,6 @@
 			]
 		},
 
-		"function_block": {
-			"name": "meta.function_block",
-			"begin": "^[ \t]*(block( [a-z0-9_]+)?) ?{(?:$| ({.+|with .+)$)",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.control.function"
-				},
-				"2": {
-					"name": "entity.name.function",
-					"patterns": [
-						{
-							"include": "#inline_js"
-						}
-					]
-				},
-				"3": {
-					"patterns": [
-						{
-							"include": "source.injected-mcfunction"
-						}
-					]
-				}
-			},
-			"end": "^[ \t]*}$",
-			"patterns": [
-				{
-					"include": "#function_context"
-				}
-			]
-		},
-
 		"advancement_definition": {
 			"begin": "^[ \t]*(advancement) (.+?) ?{",
 			"beginCaptures": {
@@ -818,6 +787,37 @@
 					"name": "keyword.other"
 				}
 			},
+			"patterns": [
+				{
+					"include": "#function_context"
+				}
+			]
+		},
+
+		"function_block": {
+			"name": "meta.function_block",
+			"begin": "(block( [a-z0-9_]+)?)? ?{(?:$| ({.+|with .+)$)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.function"
+				},
+				"2": {
+					"name": "entity.name.function",
+					"patterns": [
+						{
+							"include": "#inline_js"
+						}
+					]
+				},
+				"3": {
+					"patterns": [
+						{
+							"include": "source.injected-mcfunction"
+						}
+					]
+				}
+			},
+			"end": "^[ \t]*}$",
 			"patterns": [
 				{
 					"include": "#function_context"
