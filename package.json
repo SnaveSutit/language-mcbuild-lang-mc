@@ -4,7 +4,7 @@
 	"description": "Official MCBuild VSCode Toolkit",
 	"icon": "icon.png",
 	"repository": "https://github.com/SnaveSutit/language-mcbuild-lang-mc",
-	"version": "2.0.3",
+	"version": "2.0.4",
 	"publisher": "SnaveSutit",
 	"license": "MIT",
 	"keywords": [
