@@ -125,6 +125,18 @@
 			}
 		},
 
+		"macro_argument_embed": {
+			"match": "(\\$)\\((\\w+)\\)",
+			"captures": {
+				"1": {
+					"name": "keyword.control"
+				},
+				"2": {
+					"name": "variable.name"
+				}
+			}
+		},
+
 		"dir_definition": {
 			"name": "meta.dir_definition",
 			"begin": "^[ \t]*(dir) (.+?) ?{",
@@ -758,7 +770,7 @@
 
 		"schedule_block": {
 			"name": "schedule_block",
-			"begin": "^[ \t]*(\\$?)(schedule) (function) (.+?) ?{",
+			"begin": "^[ \t]*(\\$?)(schedule)( [^ \n\t]+)(?: (replace|append))? ?{",
 			"beginCaptures": {
 				"1": {
 					"name": "markup.italic"
@@ -767,26 +779,18 @@
 					"name": "keyword.control.function"
 				},
 				"3": {
-					"name": "entity.name"
-				},
-				"4": {
-					"name": "entity.name.function",
+					"name": "constant.numeric",
 					"patterns": [
 						{
-							"include": "#inline_js"
+							"include": "#macro_argument_embed"
 						}
 					]
-				}
-			},
-			"end": "^[ \t]*} ?(\\d+(?:t|s|d))(?: ?(replace|append))?$",
-			"endCaptures": {
-				"1": {
-					"name": "constant.numeric"
 				},
-				"2": {
+				"4": {
 					"name": "keyword.other"
 				}
 			},
+			"end": "^[ \t]*}$",
 			"patterns": [
 				{
 					"include": "#function_context"
@@ -839,9 +843,12 @@
 					"name": "markup.italic"
 				}
 			},
-			"end": " (run\\b)",
+			"end": " (\\$?)(run\\b)",
 			"endCaptures": {
 				"1": {
+					"name": "markup.italic"
+				},
+				"2": {
 					"name": "keyword.control"
 				}
 			},
