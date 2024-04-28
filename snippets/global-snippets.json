@@ -1,0 +1,46 @@
+{
+	"import": {
+		"prefix": ["import"],
+		"body": ["import ${1:path}"]
+	},
+	"REPEAT": {
+		"prefix": ["REPEAT"],
+		"body": ["REPEAT (${1:args}) as ${2:variable} {", "\t$0", "}"]
+	},
+	"REPEAT-INT-RANGE": {
+		"prefix": ["REPEAT-INT"],
+		"body": ["REPEAT (${1:min}, ${2:min}) as ${3:variable} {", "\t$0", "}"]
+	},
+	"REPEAT-FLOAT-RANGE": {
+		"prefix": ["REPEAT-FLOAT"],
+		"body": ["REPEAT (${1:min}, ${2:max}, ${3:increment}) as ${4:variable} {", "\t$0", "}"]
+	},
+	"IF": {
+		"prefix": ["IF"],
+		"body": ["IF (${1:condition}) {", "\t$0", "}"]
+	},
+	"ELSE-IF": {
+		"prefix": ["} ELSE IF"],
+		"body": ["} ELSE IF (${1:condition}) {", "\t$0", "}"]
+	},
+	"ELSE": {
+		"prefix": ["} ELSE"],
+		"body": ["} ELSE {", "\t$0", "}"]
+	},
+	"UUID": {
+		"prefix": ["UUID"],
+		"body": ["${UUID}"]
+	},
+	"block": {
+		"prefix": ["block"],
+		"body": ["block ${1:name} { ${2:macro_args}", "\t$0", "}"]
+	},
+	"tick": {
+		"prefix": ["tick"],
+		"body": ["tick {", "\t$0", "}"]
+	},
+	"load": {
+		"prefix": ["load"],
+		"body": ["load {", "\t$0", "}"]
+	}
+}

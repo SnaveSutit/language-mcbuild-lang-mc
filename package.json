@@ -25,7 +25,8 @@
 		"update": "vsce publish"
 	},
 	"categories": [
-		"Programming Languages"
+		"Programming Languages",
+		"Snippets"
 	],
 	"contributes": {
 		"languages": [
@@ -67,9 +68,30 @@
 				"scopeName": "source.mc-build-template",
 				"path": "./syntaxes/mc-build-template.tmLanguage.json"
 			}
+		],
+		"snippets": [
+			{
+				"language": "mc-build",
+				"path": "snippets/global-snippets.json"
+			},
+			{
+				"language": "mc-build",
+				"path": "snippets/base-snippets.json"
+			},
+			{
+				"language": "mc-build-template",
+				"path": "snippets/template-snippets.json"
+			},
+			{
+				"language": "mc-build-template",
+				"path": "snippets/global-snippets.json"
+			}
 		]
 	},
 	"devDependencies": {
 		"prettier": "^2.8.3"
+	},
+	"dependencies": {
+		"mc-build": "^3.0.19"
 	}
 }
