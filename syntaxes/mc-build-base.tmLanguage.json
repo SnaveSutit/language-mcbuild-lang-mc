@@ -498,6 +498,28 @@
 				}
 			]
 		},
+		"enchantment_definition": {
+			"begin": "^[ \t]*(enchantment) (.+?) ?{",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.function"
+				},
+				"2": {
+					"name": "entity.name.function",
+					"patterns": [
+						{
+							"include": "#inline_js"
+						}
+					]
+				}
+			},
+			"end": "^[ \t]*}$",
+			"patterns": [
+				{
+					"include": "source.json"
+				}
+			]
+		},
 		"item_modifier_definition": {
 			"begin": "^[ \t]*(item_modifier) (.+?) ?{",
 			"beginCaptures": {
@@ -831,7 +853,7 @@
 
 		"execute": {
 			"name": "meta.execute",
-			"begin": "(^[ \t]*(\\$?)(execute\\b)|(\\belse (\\$?)execute\\b)|(else))",
+			"begin": "((?: |^[ \t]*)(\\$?)(execute\\b)|(\\belse (\\$?)execute\\b)|(else))",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control"
@@ -843,7 +865,7 @@
 					"name": "markup.italic"
 				}
 			},
-			"end": " (\\$?)(run\\b)",
+			"end": "(?: |^[ \t]*)(\\$?)(run\\b)",
 			"endCaptures": {
 				"1": {
 					"name": "markup.italic"
