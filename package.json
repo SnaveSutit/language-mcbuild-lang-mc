@@ -17,17 +17,26 @@
 		"vscode": "^1.88.1"
 	},
 	"scripts": {
+		"vscode:prepublish": "yarn run package",
+		"compile": "webpack",
+		"watch": "webpack --watch",
+		"build": "vsce package -o snavesutit-language-langmc.vsix",
+		"go": "yarn install",
+		"package": "webpack --mode production --devtool hidden-source-map",
 		"lint": "prettier --write .",
+		"test": "node ./out/test/runTest.js",
 		"build-mcfunction": "node ./.tools/inject-mcfunction.js",
-		"version_patch": "yarn version --new-version patch",
-		"version_minor": "yarn version --new-version minor",
-		"version_major": "yarn version --new-version major",
 		"update": "vsce publish"
 	},
 	"categories": [
 		"Programming Languages",
 		"Snippets"
 	],
+	"activationEvents": [
+		"onStartupFinished",
+		"onLanguage:mc-build"
+	],
+	"main": "./dist/extension.js",
 	"contributes": {
 		"languages": [
 			{
@@ -86,12 +95,40 @@
 				"language": "mc-build-template",
 				"path": "snippets/global-snippets.json"
 			}
+		],
+		"commands": [
+			{
+				"command": "mc-build.build",
+				"title": "MC-Build: Build"
+			},
+			{
+				"command": "mc-build.watch",
+				"title": "MC-Build: Watch"
+			}
 		]
 	},
 	"devDependencies": {
-		"prettier": "^2.8.3"
+		"@types/cjson": "^0.5.0",
+		"@types/cli-progress": "^3.9.2",
+		"@types/fs-extra": "^9.0.13",
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.2.2",
+		"@types/node": "^16.11.6",
+		"@types/sharp": "^0.30.2",
+		"@types/vscode": "^1.59.0",
+		"eslint": "^7.27.0",
+		"glob": "^7.1.7",
+		"mocha": "^8.4.0",
+		"prettier": "^2.8.3",
+		"typescript": "^4.6.3",
+		"vscode-test": "^1.5.2",
+		"ts-loader": "^9.5.1",
+		"ts-node": "^10.9.2",
+		"webpack": "^5.91.0",
+		"webpack-cli": "^5.1.4"
 	},
 	"dependencies": {
+		"cli-progress": "^3.10.0",
 		"mc-build": "^3.0.19"
 	}
 }
