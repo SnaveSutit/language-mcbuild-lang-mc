@@ -1,0 +1,86 @@
+{
+	"function": {
+		"prefix": ["function"],
+		"body": ["function ${1:name} {", "\t$0", "}"]
+	},
+	"dir": {
+		"prefix": ["dir"],
+		"body": ["dir ${1:name} {", "\t$0", "}"]
+	},
+	"event-function": {
+		"prefix": ["event-function"],
+		"body": ["function ${1:name} ${2|tick,load|} {", "\t$0", "}"]
+	},
+	"clock": {
+		"prefix": ["clock"],
+		"body": ["clock ${1:name} ${2:interval} {", "\t$0", "}"]
+	},
+	"execute-run": {
+		"prefix": ["execute run"],
+		"body": ["execute ${1:sub-commands} run {", "\t$0", "}"]
+	},
+	"else-execute": {
+		"prefix": ["} else execute run"],
+		"body": ["} else execute ${1:sub-commands} run {", "\t$0", "}"]
+	},
+	"else": {
+		"prefix": ["} else run"],
+		"body": ["} else run {", "\t$0", "}"]
+	},
+	"schedule": {
+		"prefix": ["schedule"],
+		"body": ["schedule ${1:delay} ${2|replace ,append |}{", "\t$0", "}"]
+	},
+	"tag": {
+		"prefix": ["tag"],
+		"body": [
+			"tag ${1|functions,blocks,entities,fluids,game_events,items,biomes,structures,damage_types|} ${2:name} ${3:replace }{",
+			"\t$0",
+			"}"
+		]
+	},
+	"advancement": {
+		"prefix": ["advancement"],
+		"body": ["advancement ${1:name} {", "\t$0", "}"]
+	},
+	"item_modifier": {
+		"prefix": ["item_modifier"],
+		"body": ["item_modifier ${1:name} {", "\t$0", "}"]
+	},
+	"loot_table": {
+		"prefix": ["loot_table"],
+		"body": ["loot_table ${1:name} {", "\t$0", "}"]
+	},
+	"predicate": {
+		"prefix": ["predicate"],
+		"body": ["predicate ${1:name} {", "\t$0", "}"]
+	},
+	"recipe": {
+		"prefix": ["recipe"],
+		"body": ["recipe ${1:name} {", "\t$0", "}"]
+	},
+	"chat_type": {
+		"prefix": ["chat_type"],
+		"body": ["chat_type ${1:name} {", "\t$0", "}"]
+	},
+	"damage_type": {
+		"prefix": ["damage_type"],
+		"body": ["damage_type ${1:name} {", "\t$0", "}"]
+	},
+	"dimension": {
+		"prefix": ["dimension"],
+		"body": ["dimension ${1:name} {", "\t$0", "}"]
+	},
+	"dimension_type": {
+		"prefix": ["dimension_type"],
+		"body": ["dimension_type ${1:name} {", "\t$0", "}"]
+	},
+	"worldgen": {
+		"prefix": ["worldgen"],
+		"body": [
+			"worldgen ${1|biome,configured_carver,configured_feature,density_function,noise,noise_settings,placed_feature,processor_list,structure,structure_set,template_pool,world_preset,flat_level_generator_preset|} ${2:name} {",
+			"\t$0",
+			"}"
+		]
+	}
+}

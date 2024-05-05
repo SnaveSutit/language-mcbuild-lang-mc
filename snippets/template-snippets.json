@@ -1,0 +1,10 @@
+{
+	"template": {
+		"prefix": ["template"],
+		"body": ["template ${1:name} {", "\t$0", "}"]
+	},
+	"with": {
+		"prefix": ["with"],
+		"body": ["with ${1:args} {", "\t$0", "}"]
+	}
+}
