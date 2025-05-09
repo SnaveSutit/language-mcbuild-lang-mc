@@ -4,6 +4,9 @@
 	"scopeName": "source.mc-build-template",
 	"patterns": [
 		{
+			"include": "source.mc-build#comment"
+		},
+		{
 			"include": "source.mc-build#import"
 		},
 		{
@@ -24,6 +27,9 @@
 				}
 			},
 			"patterns": [
+				{
+					"include": "source.mc-build#comment"
+				},
 				{
 					"include": "source.mc-build#tick/load_block"
 				},

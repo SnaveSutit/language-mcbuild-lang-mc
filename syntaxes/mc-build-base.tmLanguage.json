@@ -868,7 +868,7 @@
 					"name": "markup.italic"
 				}
 			},
-			"end": "(?: |^[ \t]*)(\\$?)(run\\b)",
+			"end": "(?: |\\b|^[ \t]*?)(\\$?)(run\\b)",
 			"endCaptures": {
 				"1": {
 					"name": "markup.italic"
@@ -911,18 +911,21 @@
 
 		"special_function_call": {
 			"name": "meta.special_function_call",
-			"match": "^[ \t]*(function) (#?)(?:(\\*|\\.?\\./)(.+?(?: |$))|(\\^)(\\d+))",
+			"match": "(?: |\\b|^[ \t]*?)(\\$?)(function\\b) (#?)(?:(\\*|\\.?\\./)(.+?(?: |$))|(\\^)(\\d+))",
 			"captures": {
 				"1": {
-					"name": "keyword.control.function"
+					"name": "markup.italic"
 				},
 				"2": {
-					"name": "entity.name.function"
+					"name": "keyword.control.function"
 				},
 				"3": {
-					"name": "keyword.operator"
+					"name": "entity.name.function"
 				},
 				"4": {
+					"name": "keyword.operator"
+				},
+				"5": {
 					"name": "entity.name.function",
 					"patterns": [
 						{
@@ -930,10 +933,10 @@
 						}
 					]
 				},
-				"5": {
+				"6": {
 					"name": "keyword.operator"
 				},
-				"6": {
+				"7": {
 					"name": "constant.numeric"
 				}
 			}

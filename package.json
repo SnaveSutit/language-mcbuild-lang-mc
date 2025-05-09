@@ -4,7 +4,7 @@
 	"description": "Official MCBuild VSCode Toolkit",
 	"icon": "icon.png",
 	"repository": "https://github.com/SnaveSutit/language-mcbuild-lang-mc",
-	"version": "2.2.1",
+	"version": "2.3.0",
 	"publisher": "SnaveSutit",
 	"license": "MIT",
 	"keywords": [
@@ -96,16 +96,7 @@
 				"path": "snippets/global-snippets.json"
 			}
 		],
-		"commands": [
-			{
-				"command": "mc-build.build",
-				"title": "MC-Build: Build"
-			},
-			{
-				"command": "mc-build.watch",
-				"title": "MC-Build: Watch"
-			}
-		]
+		"commands": []
 	},
 	"devDependencies": {
 		"@types/cjson": "^0.5.0",
@@ -130,5 +121,6 @@
 	"dependencies": {
 		"cli-progress": "^3.10.0",
 		"mc-build": "^3.0.19"
-	}
+	},
+	"packageManager": "yarn@1.22.22"
 }
