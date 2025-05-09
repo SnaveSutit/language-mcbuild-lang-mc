@@ -856,25 +856,41 @@
 
 		"execute": {
 			"name": "meta.execute",
-			"begin": "((?: |^[ \t]*)(\\$?)(execute\\b)|(\\belse (\\$?)execute\\b)|(else))",
-			"beginCaptures": {
+			"match": "((?: |^[ \t]*)(\\$?)(execute\\b)|(\\belse (\\$?)execute\\b)|(else))((?:[\\s\\S](?!execute))+?)(?: |\\b|^[ \t]*?)(\\$?)(run\\b)",
+			"captures": {
 				"1": {
-					"name": "keyword.control"
+					"name": "keyword.control.function"
 				},
 				"2": {
+					"name": "markup.italic"
+				},
+				"3": {
+					"name": "keyword.control.function"
+				},
+				"4": {
 					"name": "markup.italic"
 				},
 				"5": {
-					"name": "markup.italic"
-				}
-			},
-			"end": "(?: |\\b|^[ \t]*?)(\\$?)(run\\b)",
-			"endCaptures": {
-				"1": {
-					"name": "markup.italic"
+					"name": "keyword.control.function"
 				},
-				"2": {
-					"name": "keyword.control"
+				"6": {
+					"name": "keyword.operator"
+				},
+				"7": {
+					"patterns": [
+						{
+							"include": "#execute_if_function"
+						},
+						{
+							"include": "source.injected-mcfunction"
+						}
+					]
+				},
+				"8": {
+					"name": "keyword.control.function"
+				},
+				"9": {
+					"name": "keyword.control.function"
 				}
 			},
 			"patterns": [
