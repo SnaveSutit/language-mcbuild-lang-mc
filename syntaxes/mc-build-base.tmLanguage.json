@@ -221,7 +221,7 @@
 		},
 
 		"inline_js": {
-			"match": "<%(.+)%>",
+			"match": "<%(.+?)%>",
 			"name": "meta.inline_js",
 			"captures": {
 				"0": {
