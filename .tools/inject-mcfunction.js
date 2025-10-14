@@ -45,9 +45,10 @@ function inject_lang_mc_syntax(json) {
 	// FIXME These will need to change every time they are updated in the original mcfunction syntax.
 	json.repository['resource-name'].patterns[0].match =
 		'#?[a-z_][a-z\\_\\.\\-]*:((<%)(.+?)(%>))?[a-z0-9_\\.\\/\\-]+'
-
 	// Fix inline comments incorrectly ignoring inline-js blocks.
 	json.repository.comments.patterns[1].match = '$#(?!<%).*$'
+	// Fix entity names consuming first part of unquoted strings.
+	json.repository['names'].patterns[4].match = '[A-Za-z_]+(?=\\W)'
 }
 
 async function main() {
