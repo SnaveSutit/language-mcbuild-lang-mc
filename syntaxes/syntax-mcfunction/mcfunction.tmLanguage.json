@@ -304,6 +304,9 @@
 					"name": "meta.literals_string-double"
 				},
 				{
+					"include": "#inline-js"
+				},
+				{
 					"captures": {
 						"0": {
 							"name": "constant.character.escape.mcfunction"

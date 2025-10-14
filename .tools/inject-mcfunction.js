@@ -37,6 +37,7 @@ function inject_lang_mc_syntax(json) {
 	// Add inline-js to all patterns that need it.
 	json.repository['root'].patterns.unshift(INCLUDE_INLINE_JS)
 	json.repository['literals_string-single'].patterns.splice(1, 0, INCLUDE_INLINE_JS)
+	json.repository['literals_string-double'].patterns.splice(1, 0, INCLUDE_INLINE_JS)
 	json.repository['names'].patterns.splice(7, 0, INCLUDE_INLINE_JS)
 	json.repository['property'].patterns.forEach(pattern => {
 		pattern.patterns.unshift(INCLUDE_INLINE_JS)
