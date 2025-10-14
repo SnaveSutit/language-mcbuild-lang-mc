@@ -120,7 +120,7 @@
 	},
 	"dependencies": {
 		"cli-progress": "^3.10.0",
-		"mc-build": "^3.0.19"
+		"mc-build": "^4.0.0"
 	},
 	"packageManager": "yarn@1.22.22"
 }
