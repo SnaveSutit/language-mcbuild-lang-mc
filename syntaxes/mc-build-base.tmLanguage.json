@@ -825,7 +825,7 @@
 
 		"function_block": {
 			"name": "meta.function_block",
-			"begin": "(block( [a-z0-9_]+)?)? ?{(?:$| ({.+|with .+)$)",
+			"begin": "(?: |^[ \t]*)?(block( (?:[a-z_][a-z\\_\\.\\-]*:)?(?:[a-z0-9_\\.\\/\\-]|(?:<%.+?%>)?)+)?)? ?{(?:$| ({.+|with .+)$)",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control.function"
