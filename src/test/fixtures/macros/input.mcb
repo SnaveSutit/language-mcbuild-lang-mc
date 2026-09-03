@@ -1,0 +1,15 @@
+function m {
+	$say hello $(name)
+	$function ./other
+	$execute if score a b matches 1 run {
+		$say $(msg)
+	} else $run {
+		say plain
+	}
+	$block { {value: $(v)}
+		$say $(value)
+	}
+	$schedule $(delay)t replace {
+		say scheduled
+	}
+}

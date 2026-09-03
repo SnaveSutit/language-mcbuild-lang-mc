@@ -1,0 +1,8 @@
+function t {
+	tick {
+		say every tick
+	}
+	load{
+		say on load
+	}
+}

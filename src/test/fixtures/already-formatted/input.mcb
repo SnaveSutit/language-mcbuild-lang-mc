@@ -1,0 +1,13 @@
+function done {
+	say already good
+
+	execute if score a b matches 1 run {
+		say nested
+	}
+}
+
+dir sub {
+	function inner {
+		say hi
+	}
+}

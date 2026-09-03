@@ -1,0 +1,11 @@
+<%%
+   const x = 1
+      emit.mcb(`function generated { say hi }`)
+%%>
+function s {
+	<%%
+emit('say a');
+        emit('say b')
+	%%>
+	say <%  1 + 1  %>
+}

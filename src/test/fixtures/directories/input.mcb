@@ -1,0 +1,10 @@
+dir  outer {
+dir inner {
+function deep {
+say x
+}
+}
+   function shallow {
+   say y
+   }
+}

@@ -1,0 +1,18 @@
+function no_body {
+}
+function greet {
+	say hi
+	say there
+}
+function on_load minecraft:load {
+	say loaded
+}
+function on_tick tick {
+	say tick
+}
+function to_tag some:tag {
+	say tagged
+}
+function magic tag {
+	say hi
+}

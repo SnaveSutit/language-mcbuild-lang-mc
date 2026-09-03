@@ -1,4 +1,16 @@
 .vscode/**
 .vscode-test/**
+.github/**
 .gitignore
+.gitattributes
+.eslintrc.json
+.prettierrc.json
+.prettierignore
 vsc-extension-quickstart.md
+node_modules/**
+src/**
+out/**
+tsconfig*.json
+webpack.config.js
+**/*.ts
+**/*.map

@@ -1,0 +1,15 @@
+template my_template {
+	with a:int b:block {
+		# a comment inside an overload survives
+		say <%a%>
+	}
+	with {
+		say no args
+	}
+	tick {
+		say ticking
+	}
+	load {
+		say loading
+	}
+}

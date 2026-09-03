@@ -1,0 +1,31 @@
+advancement my_adv {
+	"criteria":{
+			"tick":{"trigger":"minecraft:tick"}
+	},
+  "requirements": [
+	  [ "tick" ]
+  ],
+	"rewards":{ "function":"my_pack:reward" }
+}
+loot_table lt {
+	"pools": []
+}
+enchantment nothing {
+}
+worldgen biome my_biome {
+	"temperature":0.5,
+	"downfall": 0.4,
+	"effects": {
+"sky_color": <%0x7907327%>,
+		"fog_color":12638463
+	}
+}
+dir sub {
+	predicate p {
+		"condition":   "minecraft:weather_check",
+		"raining": true
+	}
+	predicate not_really_json {
+		minecraft:some_predicate
+	}
+}

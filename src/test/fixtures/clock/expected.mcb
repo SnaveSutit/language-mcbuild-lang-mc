@@ -1,0 +1,3 @@
+clock my_clock 5t {
+	say tick
+}

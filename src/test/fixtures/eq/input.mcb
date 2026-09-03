@@ -1,0 +1,5 @@
+function q {
+	eq a b = 1 + 2
+	eq target score += @s value * 3
+	eq #a.b c = #d.e f + 2
+}

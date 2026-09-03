@@ -1,0 +1,11 @@
+function rr {
+	return run say direct
+	return run execute if score a b matches 1 run say nested
+	return run {
+		say block
+	}
+	return run { {a: 1}
+		say $(a)
+	}
+	$return run say macro
+}

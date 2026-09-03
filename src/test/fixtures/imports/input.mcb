@@ -1,0 +1,5 @@
+import   ./foo/thing.mcbt
+import data/pack/script.js
+function a {
+	say hi
+}

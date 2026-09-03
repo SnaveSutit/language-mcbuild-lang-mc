@@ -1,0 +1,25 @@
+# top level comment
+#no-space comment
+
+# this comment is written across \
+	several physical lines \
+	using backslash continuations
+
+dir d {
+	# comment inside dir
+	function f {
+		# comment inside function
+		say hi
+		# a wrapped comment \
+		in a function
+		block {
+			# comment inside block
+			say x
+		}
+	}
+}
+###
+this is a fenced block comment
+spanning several lines
+###
+### single-hash-prefixed line

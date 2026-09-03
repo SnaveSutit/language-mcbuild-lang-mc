@@ -1,0 +1,18 @@
+IF (config.dev) {
+	function dev_only {
+		say dev
+	}
+} ELSE {
+	function prod_only {
+		say prod
+	}
+}
+function f {
+	IF (x === 1) {
+		say one
+	} ELSE IF (x === 2) {
+		say two
+	} ELSE {
+		say other
+	}
+}

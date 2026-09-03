@@ -1,0 +1,40 @@
+function e {
+	execute as @a run say hi
+	execute run test_call
+	execute if score a b matches 1 run {
+		say block
+	}
+	execute if score a b matches 1 run {
+		say if
+	} else execute if score a b matches 2 run {
+		say else if
+	} else run {
+		say else
+	}
+	execute run block named_target {
+		say named block target
+	}
+	execute if score a b matches 1 run { {macro: 1}
+		say with data
+	}
+	execute \
+		positioned -28 76.525 213 \
+		unless entity @e[type=item_display, tag=aj_booth.conveyor_blockbenchium, distance=..0.1] \
+		positioned -26 76.525 213 \
+		as @e[type=item_display, tag=aj_booth.conveyor_blockbenchium, distance=..0.1, limit=1] \
+	run {
+		tp @s -28 76.525 213
+		set #has_moved v 1
+	}
+	execute \
+		as @a \
+		at @s \
+	run say wrapped inline command
+	execute if score a b matches 1 run {
+		say a
+	} else \
+		execute if score a b matches 2 \
+	run {
+		say b
+	}
+}

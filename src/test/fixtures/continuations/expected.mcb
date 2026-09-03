@@ -1,0 +1,13 @@
+function c {
+	say this is a very long line that \
+		continues onto another line \
+		and one more
+	tellraw @a {"text":"short"}
+	execute \
+			if score a b matches 1 \
+			if score c d matches 2 \
+		run say hanging indent is kept
+	execute \
+		if entity @s[tag=ready] \
+	run say closing run stays at base indent
+}

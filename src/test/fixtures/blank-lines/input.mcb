@@ -1,0 +1,16 @@
+function first {
+	say a
+
+
+
+	say b
+}
+
+
+
+
+function second {
+
+
+	say c
+}

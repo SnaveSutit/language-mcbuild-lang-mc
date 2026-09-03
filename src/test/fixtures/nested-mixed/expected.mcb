@@ -1,0 +1,21 @@
+dir features {
+	function setup minecraft:load {
+		scoreboard objectives add feat.x dummy
+
+		execute as @e[type=marker] run {
+			IF (config.debug) {
+				say debug on
+			} ELSE {
+				say debug off
+			}
+			block cleanup {
+				kill @s
+			}
+		}
+	}
+	clock heartbeat 20t {
+		execute if score #x feat.x matches 1.. run {
+			say alive
+		}
+	}
+}

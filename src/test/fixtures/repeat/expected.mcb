@@ -1,0 +1,14 @@
+function r {
+	REPEAT(3) as i {
+		say <%i%>
+	}
+	REPEAT (1, 10) as i {
+		say <%i%>
+	}
+	REPEAT([1,2,3]) as v {
+		say <%v%>
+	}
+	REPEAT({a:1,b:2}) as k, v {
+		say <%k%>
+	}
+}

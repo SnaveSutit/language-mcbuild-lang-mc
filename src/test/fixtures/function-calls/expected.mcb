@@ -1,0 +1,10 @@
+function fc {
+	function ^0
+	function ./sibling
+	function ../parent/thing
+	function *root/thing
+	function #minecraft:tick
+	function #./local_tag
+	$function ./macro_target
+	function ./with_args {value: 1}
+}

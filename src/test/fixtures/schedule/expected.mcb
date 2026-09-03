@@ -1,0 +1,15 @@
+function s {
+	schedule 1t append {
+		say append
+	}
+	schedule 5s replace {
+		say replace
+	}
+	schedule 1t {
+		say no mode
+	}
+	schedule function ./demo 2t
+	schedule function *root/demo 3t replace
+	schedule clear ./demo
+	schedule clear *root/demo
+}

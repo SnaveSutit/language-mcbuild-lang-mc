@@ -1,0 +1,13 @@
+tag functions my_group {
+	foo:bar
+	#other:tag
+	./local
+}
+tag functions replaced replace {
+	a:b
+}
+tag blocks blks {
+	minecraft:stone
+	minecraft:dirt replace
+	<%"#dynamic:tag"%>
+}

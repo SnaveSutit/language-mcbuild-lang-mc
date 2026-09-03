@@ -1,0 +1,7 @@
+function messy {
+	say four spaces
+	say one tab
+	block {
+		say deep
+	}
+}

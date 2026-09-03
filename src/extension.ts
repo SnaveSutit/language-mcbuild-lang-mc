@@ -1,94 +1,47 @@
 import * as vscode from 'vscode'
-// import * as path from 'path'
-// import { Compiler, Parser, SyncIo, Tokenizer } from 'mc-build'
-// import { AstNode } from 'mc-build/dist/mcl/AstNode'
+import { formatMcb } from './formatter'
+import type { McbFileKind } from './mcb'
 
-// function getRelativeSourcePath(filePath: vscode.Uri): string {
-// 	const parts = filePath.fsPath.split(path.sep)
-// 	const srcIndex = parts.lastIndexOf('src')
-// 	if (srcIndex !== -1) {
-// 		return path.join(...parts.slice(srcIndex + 1))
-// 	}
-// 	return path.join(...parts.slice(srcIndex))
-// }
+const LANGUAGE_KINDS: Record<string, McbFileKind> = {
+	'mc-build': 'mcb',
+	'mc-build-template': 'mcbt',
+}
 
-// function formatMCBuildAST(
-// 	document: vscode.TextDocument,
-// 	options: vscode.FormattingOptions,
-// 	token: vscode.CancellationToken,
-// 	ast: AstNode[]
-// ): vscode.TextEdit[] {
-// 	const edits: vscode.TextEdit[] = []
-
-// 	for (const node of ast) {
-// 		switch (node.type) {
-// 			case 'FunctionDef': {
-// 				const expected = `function ${node.name} {`
-// 				const line = document.lineAt(node.pos.line - 1)
-// 				if (line.text !== expected) {
-// 					edits.push(vscode.TextEdit.replace(line.range, expected))
-// 				}
-// 				edits.push(...formatMCBuildAST(document, options, token, node.body))
-// 				break
-// 			}
-// 		}
-// 	}
-
-// 	return edits
-// }
-
-export async function activate(context: vscode.ExtensionContext) {
+export function activate(context: vscode.ExtensionContext) {
 	console.log('MC-Build Extension Activated!')
 
-	vscode.languages.registerDocumentFormattingEditProvider('mc-build', {
-		provideDocumentFormattingEdits(document, options, token) {
-			const edits: vscode.TextEdit[] = []
+	const provider: vscode.DocumentFormattingEditProvider = {
+		provideDocumentFormattingEdits(document) {
+			const kind = LANGUAGE_KINDS[document.languageId]
+			if (!kind) return []
 
-			const code = document.getText()
-			const lines = code.split(/\r?\n/g)
-
-			const indentRegex = RegExp(`^([ \t]+)(.*)`)
-			for (const line of lines) {
-				const indentMatch = indentRegex.exec(line)
-				if (!indentMatch) continue
-
-				if (indentMatch[2].length === 0) {
-					// Remove empty indented lines
-					const range = new vscode.Range(
-						new vscode.Position(lines.indexOf(line), 0),
-						new vscode.Position(lines.indexOf(line), indentMatch[0].length)
-					)
-					edits.push(vscode.TextEdit.delete(range))
-				} else if (indentMatch[1].includes(' ')) {
-					// Replace spaces with tabs
-					const range = new vscode.Range(
-						new vscode.Position(lines.indexOf(line), 0),
-						new vscode.Position(lines.indexOf(line), indentMatch[1].length)
-					)
-					const replacementTabs = indentMatch[1]
-						.replaceAll(' '.repeat(options.tabSize), '\t')
-						.replaceAll(' ', '')
-					console.log(
-						`Replacing spaces with tabs: "${indentMatch[1]}" -> "${replacementTabs}"`
-					)
-					edits.push(vscode.TextEdit.replace(range, replacementTabs))
-				}
+			const original = document.getText()
+			let formatted: string
+			try {
+				formatted = formatMcb(original, kind)
+			} catch (error) {
+				// A parse error usually just means the file is mid-edit - leave it alone.
+				console.warn(`MC-Build: skipped formatting ${document.fileName}:`, error)
+				return []
 			}
 
-			// const fileName = document.fileName
-			// const srcPath = getRelativeSourcePath(document.uri)
-			// console.log(`Formatting ${srcPath}`)
-			// try {
-			// 	const tokens = Tokenizer.tokenize(code, srcPath)
-			// 	const ast = Parser.parseMcbFile(tokens)
-			// 	console.log(ast)
-			// 	edits.push(...formatMCBuildAST(document, options, token, ast))
-			// } catch (e) {
-			// 	vscode.window.showErrorMessage(`Tokenizer Error: ${(e as Error).message}`)
-			// 	return edits
-			// }
+			if (formatted === original || formatted === '') return []
 
-			return edits
+			const fullRange = new vscode.Range(
+				document.positionAt(0),
+				document.positionAt(original.length)
+			)
+			return [vscode.TextEdit.replace(fullRange, formatted)]
 		},
-	})
+	}
+
+	for (const language of Object.keys(LANGUAGE_KINDS)) {
+		context.subscriptions.push(
+			vscode.languages.registerDocumentFormattingEditProvider(language, provider)
+		)
+	}
+}
+
+export function deactivate() {
+	// nothing to clean up
 }

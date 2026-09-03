@@ -1,0 +1,25 @@
+function b {
+	{
+		say bare anon
+	}
+	block {
+		say keyword anon
+	}
+	block named_block {
+		say named
+	}
+	block with_data { {a: 1, b: 2}
+		say data
+	}
+	block {{c:3}
+		say tight data
+	}
+	{ with storage foo:bar path
+		say with-data anon
+	}
+	block outer/inner {
+		block {
+			say nested
+		}
+	}
+}
