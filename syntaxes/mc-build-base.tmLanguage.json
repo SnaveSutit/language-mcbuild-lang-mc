@@ -11,6 +11,9 @@
 		"folder_context": {
 			"patterns": [
 				{
+					"include": "#block_comment"
+				},
+				{
 					"include": "#comment"
 				},
 				{
@@ -30,34 +33,7 @@
 				},
 
 				{
-					"include": "#advancement_definition"
-				},
-				{
-					"include": "#enchantment_definition"
-				},
-				{
-					"include": "#item_modifier_definition"
-				},
-				{
-					"include": "#loot_table_definition"
-				},
-				{
-					"include": "#predicate_definition"
-				},
-				{
-					"include": "#recipe_definition"
-				},
-				{
-					"include": "#chat_type_definition"
-				},
-				{
-					"include": "#damage_type_definition"
-				},
-				{
-					"include": "#dimension_definition"
-				},
-				{
-					"include": "#dimension_type_definition"
+					"include": "#json_file_definition"
 				},
 				{
 					"include": "#worldgen_definition"
@@ -77,6 +53,9 @@
 		},
 		"function_context": {
 			"patterns": [
+				{
+					"include": "#block_comment"
+				},
 				{
 					"include": "#inline_js"
 				},
@@ -108,9 +87,6 @@
 					"include": "#execute_if_function"
 				},
 				{
-					"include": "#multiline_command"
-				},
-				{
 					"include": "source.injected-mcfunction"
 				}
 			]
@@ -126,6 +102,77 @@
 					"name": "string"
 				}
 			}
+		},
+
+		"block_comment": {
+			"name": "comment.block",
+			"begin": "^[ \t]*###$",
+			"end": "^[ \t]*###$"
+		},
+
+		"json_file_definition": {
+			"begin": "^[ \t]*(advancement|enchantment|item_modifier|loot_table|predicate|recipe|chat_type|damage_type|dimension|dimension_type) (.+?) ?{",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.function"
+				},
+				"2": {
+					"name": "entity.name.function",
+					"patterns": [
+						{
+							"include": "#inline_js"
+						}
+					]
+				}
+			},
+			"end": "^[ \t]*}$",
+			"patterns": [
+				{
+					"include": "source.json"
+				}
+			]
+		},
+
+		"repeat_argument": {
+			"patterns": [
+				{
+					"match": "-?(\\d+) ?(,) ?-?(\\d+)",
+					"captures": {
+						"1": {
+							"name": "constant.numeric"
+						},
+						"2": {
+							"name": "keyword.operator"
+						},
+						"3": {
+							"name": "constant.numeric"
+						}
+					}
+				},
+				{
+					"match": "(-?[\\d\\.]+) ?(,) ?(-?[\\d\\.]+) ?(,) ?(-?[\\d\\.]+)",
+					"captures": {
+						"1": {
+							"name": "constant.numeric"
+						},
+						"2": {
+							"name": "keyword.operator"
+						},
+						"3": {
+							"name": "constant.numeric"
+						},
+						"4": {
+							"name": "keyword.operator"
+						},
+						"5": {
+							"name": "constant.numeric"
+						}
+					}
+				},
+				{
+					"include": "source.js"
+				}
+			]
 		},
 
 		"macro_argument_embed": {
@@ -165,7 +212,7 @@
 		},
 		"function_definition": {
 			"name": "meta.function_definition",
-			"begin": "^[ \t]*(function) (.+?)(?: (tick|load))? ?{",
+			"begin": "^[ \t]*(function) (.+?)(?: ((?:[a-z0-9_.\\-]+:)?[a-z0-9_.\\-\\/]+))? ?{",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control.function"
@@ -262,41 +309,7 @@
 				"2": {
 					"patterns": [
 						{
-							"match": "-?(\\d+) ?(,) ?-?(\\d+)",
-							"captures": {
-								"1": {
-									"name": "constant.numeric"
-								},
-								"2": {
-									"name": "keyword.operator"
-								},
-								"3": {
-									"name": "constant.numeric"
-								}
-							}
-						},
-						{
-							"match": "(-?[\\d\\.]+) ?(,) ?(-?[\\d\\.]+) ?(,) ?(-?[\\d\\.]+)",
-							"captures": {
-								"1": {
-									"name": "constant.numeric"
-								},
-								"2": {
-									"name": "keyword.operator"
-								},
-								"3": {
-									"name": "constant.numeric"
-								},
-								"4": {
-									"name": "keyword.operator"
-								},
-								"5": {
-									"name": "constant.numeric"
-								}
-							}
-						},
-						{
-							"include": "source.js"
+							"include": "#repeat_argument"
 						}
 					]
 				},
@@ -324,41 +337,7 @@
 				"2": {
 					"patterns": [
 						{
-							"match": "-?(\\d+) ?(,) ?-?(\\d+)",
-							"captures": {
-								"1": {
-									"name": "constant.numeric"
-								},
-								"2": {
-									"name": "keyword.operator"
-								},
-								"3": {
-									"name": "constant.numeric"
-								}
-							}
-						},
-						{
-							"match": "(-?[\\d\\.]+) ?(,) ?(-?[\\d\\.]+) ?(,) ?(-?[\\d\\.]+)",
-							"captures": {
-								"1": {
-									"name": "constant.numeric"
-								},
-								"2": {
-									"name": "keyword.operator"
-								},
-								"3": {
-									"name": "constant.numeric"
-								},
-								"4": {
-									"name": "keyword.operator"
-								},
-								"5": {
-									"name": "constant.numeric"
-								}
-							}
-						},
-						{
-							"include": "source.js"
+							"include": "#repeat_argument"
 						}
 					]
 				},
@@ -479,226 +458,6 @@
 			]
 		},
 
-		"advancement_definition": {
-			"begin": "^[ \t]*(advancement) (.+?) ?{",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.control.function"
-				},
-				"2": {
-					"name": "entity.name.function",
-					"patterns": [
-						{
-							"include": "#inline_js"
-						}
-					]
-				}
-			},
-			"end": "^[ \t]*}$",
-			"patterns": [
-				{
-					"include": "source.json"
-				}
-			]
-		},
-		"enchantment_definition": {
-			"begin": "^[ \t]*(enchantment) (.+?) ?{",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.control.function"
-				},
-				"2": {
-					"name": "entity.name.function",
-					"patterns": [
-						{
-							"include": "#inline_js"
-						}
-					]
-				}
-			},
-			"end": "^[ \t]*}$",
-			"patterns": [
-				{
-					"include": "source.json"
-				}
-			]
-		},
-		"item_modifier_definition": {
-			"begin": "^[ \t]*(item_modifier) (.+?) ?{",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.control.function"
-				},
-				"2": {
-					"name": "entity.name.function",
-					"patterns": [
-						{
-							"include": "#inline_js"
-						}
-					]
-				}
-			},
-			"end": "^[ \t]*}$",
-			"patterns": [
-				{
-					"include": "source.json"
-				}
-			]
-		},
-		"loot_table_definition": {
-			"begin": "^[ \t]*(loot_table) (.+?) ?{",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.control.function"
-				},
-				"2": {
-					"name": "entity.name.function",
-					"patterns": [
-						{
-							"include": "#inline_js"
-						}
-					]
-				}
-			},
-			"end": "^[ \t]*}$",
-			"patterns": [
-				{
-					"include": "source.json"
-				}
-			]
-		},
-		"predicate_definition": {
-			"begin": "^[ \t]*(predicate) (.+?) ?{",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.control.function"
-				},
-				"2": {
-					"name": "entity.name.function",
-					"patterns": [
-						{
-							"include": "#inline_js"
-						}
-					]
-				}
-			},
-			"end": "^[ \t]*}$",
-			"patterns": [
-				{
-					"include": "source.json"
-				}
-			]
-		},
-		"recipe_definition": {
-			"begin": "^[ \t]*(recipe) (.+?) ?{",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.control.function"
-				},
-				"2": {
-					"name": "entity.name.function",
-					"patterns": [
-						{
-							"include": "#inline_js"
-						}
-					]
-				}
-			},
-			"end": "^[ \t]*}$",
-			"patterns": [
-				{
-					"include": "source.json"
-				}
-			]
-		},
-		"chat_type_definition": {
-			"begin": "^[ \t]*(chat_type) (.+?) ?{",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.control.function"
-				},
-				"2": {
-					"name": "entity.name.function",
-					"patterns": [
-						{
-							"include": "#inline_js"
-						}
-					]
-				}
-			},
-			"end": "^[ \t]*}$",
-			"patterns": [
-				{
-					"include": "source.json"
-				}
-			]
-		},
-		"damage_type_definition": {
-			"begin": "^[ \t]*(damage_type) (.+?) ?{",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.control.function"
-				},
-				"2": {
-					"name": "entity.name.function",
-					"patterns": [
-						{
-							"include": "#inline_js"
-						}
-					]
-				}
-			},
-			"end": "^[ \t]*}$",
-			"patterns": [
-				{
-					"include": "source.json"
-				}
-			]
-		},
-		"dimension_definition": {
-			"begin": "^[ \t]*(dimension) (.+?) ?{",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.control.function"
-				},
-				"2": {
-					"name": "entity.name.function",
-					"patterns": [
-						{
-							"include": "#inline_js"
-						}
-					]
-				}
-			},
-			"end": "^[ \t]*}$",
-			"patterns": [
-				{
-					"include": "source.json"
-				}
-			]
-		},
-		"dimension_type_definition": {
-			"begin": "^[ \t]*(dimension_type) (.+?) ?{",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.control.function"
-				},
-				"2": {
-					"name": "entity.name.function",
-					"patterns": [
-						{
-							"include": "#inline_js"
-						}
-					]
-				}
-			},
-			"end": "^[ \t]*}$",
-			"patterns": [
-				{
-					"include": "source.json"
-				}
-			]
-		},
 		"worldgen_definition": {
 			"begin": "^[ \t]*(worldgen) (biome|configured_carver|configured_feature|density_function|noise|noise_settings|placed_feature|processor_list|structure|structure_set|template_pool|world_preset|flat_level_generator_preset) (.+?) ?{",
 			"beginCaptures": {
@@ -825,12 +584,15 @@
 
 		"function_block": {
 			"name": "meta.function_block",
-			"begin": "(?: |^[ \t]*)?(block( (?:[a-z_][a-z\\_\\.\\-]*:)?(?:[a-z0-9_\\.\\/\\-]|(?:<%.+?%>)?)+)?)? ?{(?:$| ({.+|with .+)$)",
+			"begin": "(?: |^[ \t]*)?(\\$?)(block( (?:[a-z_][a-z\\_\\.\\-]*:)?(?:[a-z0-9_\\.\\/\\-]+|<%.+?%>)+)?)? ?{(?:$| ?({.+|with .+)$)",
 			"beginCaptures": {
 				"1": {
-					"name": "keyword.control.function"
+					"name": "markup.italic"
 				},
 				"2": {
+					"name": "keyword.control.function"
+				},
+				"3": {
 					"name": "entity.name.function",
 					"patterns": [
 						{
@@ -838,7 +600,7 @@
 						}
 					]
 				},
-				"3": {
+				"4": {
 					"patterns": [
 						{
 							"include": "source.injected-mcfunction"
@@ -892,18 +654,7 @@
 				"9": {
 					"name": "keyword.control.function"
 				}
-			},
-			"patterns": [
-				{
-					"include": "#execute"
-				},
-				{
-					"include": "#execute_if_function"
-				},
-				{
-					"include": "source.injected-mcfunction"
-				}
-			]
+			}
 		},
 
 		"execute_if_function": {
